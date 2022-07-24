@@ -1,0 +1,41 @@
+.checkbox-inverse {
+    width: 120px;
+}
+
+.email-verification-form-wrapper {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    height: auto !important;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    right: unset !important;
+    min-width: 40%;
+    border-radius: 5px;
+}
+
+.email-verification-form-wrapper .email-verification-form-section {
+    text-align: center;
+}
+
+.email-verification-form-wrapper .email-verification-form-section h3 {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 600px){
+
+    .email-verification-form-wrapper {
+        min-width: 60%;
+    }
+
+}
+
+@media (max-width: 500px){
+
+    .email-verification-form-wrapper {
+        min-width: 80%;
+    }
+
+}

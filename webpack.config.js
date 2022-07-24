@@ -6,7 +6,7 @@ const path = require(`path`),
 const configObj = {
     entry: {
     
-        common: [ ...entryDependancies, `./src/common.js` ],
+        'business-form': [ ...entryDependancies, `./src/businessForm.js` ]
   
     },
     output: {
