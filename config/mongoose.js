@@ -1,5 +1,5 @@
 const missingPackageLogger = require(`../handlers/missingPackageLogger`),
-    { mongoURL, mainDbName } = require(`./config/mongodbConfig`);
+    { mongoURL, mainDbName } = require(`./mongodbConfig`);
 
 
 module.exports = (mongoose) => {

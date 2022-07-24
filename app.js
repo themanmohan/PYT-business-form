@@ -18,7 +18,7 @@ app.set(`view engine`, `ejs`);
 
 // App config
 
-const loadHelmet = require(`./loaders/helmet`),
+const loadHelmet = require(`./loaders/helmets`),
     loadExpressSession = require(`./loaders/expressSession`);
 
 loadHelmet(app, helmet);
@@ -32,12 +32,11 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json())
 
 // logging http activity
-if(process.env.MODE.toLowerCase() === `dev`){
-    const loadMorgan = require(`../../shared/loaders/morgan`);
-    loadMorgan(app, require(`morgan`));
-}
+// if(process.env.MODE.toLowerCase() === `dev`){
+//     app.use(require(`morgan`))
+// }
 
-// Routes
+//Routes
 const routes = require(`./routes/_all`);
 app.use(routes);
 
