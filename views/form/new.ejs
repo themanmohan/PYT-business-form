@@ -1,592 +1,473 @@
 <%- include(`../partials/head`) %>
 
-    <%- include(`../partials/head-end`) %>
+<%- include(`../partials/head-end`) %>
 
+<%- include(`../partials/header`) %>
 
-        <!--======================== Navigation Bar ========================/---->
+<!--========================Body Content========================/---->
+<div class="wrapper">
 
-        <header id="topnav">
-            <div class="topbar-main">
-                <div class="container">
+    <div class="container">
 
-                    <!-- Logo container-->
-                    <div class="logo">
-                        <a href="#" class="logo"><span>PYT - Business</span></a>
-                    </div>
-                    <!-- End Logo container-->
+        <div class="row">
 
+            <div class="col-sm-12">
 
-                    <div class="menu-extras">
+                <h4 class="page-title">Fill Your Information</h4>
 
-                        <ul class="nav navbar-nav navbar-right pull-right">
+                    <ol class="breadcrumb ">
+                        <li class="active">Santa Rita Experience</li>
+                        <li class="active">Forms</li>
+                        <li class="active">Information</li>
+                    </ol>
 
-
-
-                            <li class="dropdown navbar-c-items">
-                                <a href="index.html" class="dropdown-toggle waves-effect waves-light profile"><i
-                                        class="glyphicon  glyphicon-floppy-disk  "></i>&nbsp; Save Info</a>
-                            </li>
-                        </ul>
-
-                    </div>
-
-                </div>
             </div>
-        </header>
-        <!-- End Navigation Bar-->
 
+        </div>
 
+        <form action="#" class="" data-parsley-validate novalidate>
 
+            <div class="row">
 
-        <!--========================Body Content========================/---->
-        <div class="wrapper">
-            <div class="container">
+                <div class="col-lg-6">
 
+                    <div class="card-box">
+                        <h4 class="m-t-0 header-title"><b>Name and Address</b></h4>
 
-                <div class="row">
-                    <div class="col-sm-12">
+                        <p class="text-muted font-13 m-b-30">
+                            Fill the firm name and Address
+                        </p>
 
+                        <div class="form-group">
+                            <label for="location_name">Location Name*</label>
+                            <input type="text" name="location_name" parsley-trigger="change" required placeholder="Enter Location Name" class="form-control" id="location_name">
+                        </div>
 
-                        <h4 class="page-title">Fill Your Information</h4>
-                        <ol class="breadcrumb ">
-                            <li class="active">Santa Rita Experience</li>
-                            <li class="active">Forms</li>
-                            <li class="active">Information</li>
-                        </ol>
+                        <div class="form-group">
+                            <label for="city">City*</label>
+                            <input type="text" name="city" parsley-trigger="change" required placeholder="Enter City" class="form-control" id="city">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country*</label>
+                            <input type="text" name="country" parsley-trigger="change" required placeholder="Enter Country" class="form-control" id="country">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address and Landmark*</label>
+                            <textarea type="address" name="adress" parsley-trigger="change" required placeholder="Enter Address" class="form-control" id="address"></textarea>
+                        </div>
+                    
                     </div>
+
                 </div>
 
+                <div class="col-lg-6">
+                    <div class="card-box">
+                        <h4 class="m-t-0 header-title"><b>Basic Info</b></h4>
+                        <p class="text-muted font-13 m-b-30">
+                            We want some of your info to show in our app.
+                        </p>
+
+                            <div class="form-group">
+                                <label for="CityName">Interests*</label>
+                                <p class="text-muted  font-12">Select Category In which your firm lies</p>
+                                <select class="selectpicker m-b-0" multiple data-max-options="3"
+                                    data-style="btn-white">
+                                    <option>Food & Wine</option>
+                                    <option>City Life</option>
+                                    <option>Nightlife & Entertainment</option>
+                                    <option>History, Art & Culture</option>
+                                    <option>Nature</option>
+                                    <option>Mountains</option>
+                                    <option>Beaches</option>
+                                    <option>Lakes & Rivers</option>
+                                    <option>Wildlife</option>
+                                    <option>Dunes & Deserts</option>
+                                    <option>Road Trips</option>
+                                    <option>Cruises</option>
+                                    <option>Adventure Sports</option>
+                                    <option>Hotels & Wellness</option>
+                                    <option>Retail Therapy</option>
+                                    <option>Kid Friendly</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
 
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card-box">
-                            <h4 class="m-t-0 header-title"><b>Name and Address</b></h4>
-                            <p class="text-muted font-13 m-b-30">
-                                Fill the firm name and Address
-                            </p>
-
-                            <form action="#" data-parsley-validate novalidate>
-                                <div class="form-group">
-                                    <label for="firmName">Location Name*</label>
-                                    <input type="text" name="nick" parsley-trigger="change" required
-                                        placeholder="Enter Location Name" class="form-control" id="userName">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="CityName">City*</label>
-                                    <input type="text" name="city" parsley-trigger="change" required
-                                        placeholder="Enter City" class="form-control" id="City">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="Country">Country*</label>
-                                    <input type="text" name="city" parsley-trigger="change" required
-                                        placeholder="Enter Country" class="form-control" id="Country">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="Address">Address and Landmark*</label>
-                                    <textarea type="address" name="adress" parsley-trigger="change" required
-                                        placeholder="Enter Address" class="form-control" id="Address"></textarea>
-                                </div>
+                            <!-- <div class="form-group">
+                                <label for="Cusine">Cusine</label>
+                                <input type="text" name="Cusine" parsley-trigger="change" required placeholder="Enter Cusine Name" class="form-control" id="Cusine">
+                            </div> -->
 
 
 
-                            </form>
-                        </div>
+                            <div class="form-group">
+                                <label for="Country">Contact Number*</label>
+                                <input type="text" name="city" parsley-trigger="change" required
+                                    placeholder="Enter Contact Number" class="form-control" id="Country">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="Website">Website*</label>
+                                <p class="text-muted  font-12">Example:www.abcd.com/hotles</p>
+                                <input type="text" name="city" parsley-trigger="change" required
+                                    placeholder="Enter Website Link" class="form-control" id="Website">
+                            </div>
+
+
+
+
+
+
                     </div>
+                </div>
+            </div><!-- end row -->
 
+            <div class="row">
 
+                <div class="col-lg-12">
+                    
+                    <div class="card-box">
+                        <h4 class="m-t-0 header-title"><b>TIMINGS*</b></h4>
 
+                        <p class="text-muted font-13 m-b-30">
+                            Select day and fill the timings
+                        </p>
 
+                        <!--================== Monday ============== -->
 
-                    <div class="col-lg-6">
-                        <div class="card-box">
-                            <h4 class="m-t-0 header-title"><b>Basic Info</b></h4>
-                            <p class="text-muted font-13 m-b-30">
-                                We want some of your info to show in our app.
-                            </p>
+                        <div class="row m-b-30">
 
-                            <form action="#" data-parsley-validate novalidate>
+                            <div class="col-sm-12">
 
+                                <div class="form-inline">
+                        
+                                    <div class="form-group m-r-15">
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="monday" value="monday" type="checkbox">
+                                            <label for="checkbox"> Monday </label>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="CityName">Interests*</label>
-                                    <p class="text-muted  font-12">Select Category In which your firm lies</p>
-                                    <select class="selectpicker m-b-0" multiple data-max-options="3"
-                                        data-style="btn-white">
-                                        <option>Food & Wine</option>
-                                        <option>City Life</option>
-                                        <option>Nightlife & Entertainment</option>
-                                        <option>History, Art & Culture</option>
-                                        <option>Nature</option>
-                                        <option>Mountains</option>
-                                        <option>Beaches</option>
-                                        <option>Lakes & Rivers</option>
-                                        <option>Wildlife</option>
-                                        <option>Dunes & Deserts</option>
-                                        <option>Road Trips</option>
-                                        <option>Cruises</option>
-                                        <option>Adventure Sports</option>
-                                        <option>Hotels & Wellness</option>
-                                        <option>Retail Therapy</option>
-                                        <option>Kid Friendly</option>
-                                        <option>Other</option>
-                                    </select>
+                                    <div class="input-group m-b-0">
+
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker" type="text" name="monday_start_time" class="form-control">
+                                        </div>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker3" name="monday_end_time"  type="text" class="form-control">
+                                        </div>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+
+                                    </div><!-- input-group -->
+
                                 </div>
+                            
+                            </div>
 
-
-                                <!-- <div class="form-group">
-                                    <label for="Cusine">Cusine</label>
-                                    <input type="text" name="Cusine" parsley-trigger="change" required placeholder="Enter Cusine Name" class="form-control" id="Cusine">
-                                </div> -->
-
-
-
-                                <div class="form-group">
-                                    <label for="Country">Contact Number*</label>
-                                    <input type="text" name="city" parsley-trigger="change" required
-                                        placeholder="Enter Contact Number" class="form-control" id="Country">
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="Website">Website*</label>
-                                    <p class="text-muted  font-12">Example:www.abcd.com/hotles</p>
-                                    <input type="text" name="city" parsley-trigger="change" required
-                                        placeholder="Enter Website Link" class="form-control" id="Website">
-                                </div>
-
-
-
-
-
-
-                            </form>
                         </div>
-                    </div>
-                </div><!-- end row -->
 
+                        <!--================== Tuesday ============== -->
 
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
+                        
+                                <div class="form-inline">
 
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-box">
-                            <h4 class="m-t-0 header-title"><b>TIMINGS*</b></h4>
-                            <p class="text-muted font-13 m-b-30">
-                                Select day and fill the timings
-                            </p>
-
-                            <!--================== Monday ============== -->
-
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
-
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Monday
-                                                </label>
-                                            </div>
+                                    <div class="form-group m-r-15">
+                                        
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="tuesday" value="tuesday" type="checkbox">
+                                            <label for="checkbox"> Tuesday </label>
                                         </div>
 
-                                        <div class="input-group m-b-0">
+                                    </div>
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
+                                    <div class="input-group m-b-0">
+
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker4" name="tuesday_start_time" type="text" class="form-control">
                                         </div>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
 
-                                        <div class="input-group m-b-0">
+                                    </div>
 
-                                            <span class="text-muted  font-12">TO</span>
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+
+
+                                    <div class="input-group m-b-0">
+
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker5" name="tuesday_end_time" type="text" class="form-control">
                                         </div>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
 
-                                        <div class="input-group m-b-0">
+                                    </div><!-- input-group -->
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker3" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
                                 </div>
+                            </div>
+                        </div>
 
+                        <!--================== Wednesday ============== -->
+
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
+
+                                <div class="form-inline" >
+
+                                    <div class="form-group m-r-15">
+
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" class="wednesday" value="wednesday" type="checkbox">
+                                            <label for="checkbox"> Wednesday  </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker6" name="wednesday_start_time" type="text" class="form-control">
+                                        </div>
+
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker7" type="text" name="wednesday_start_time" class="form-control">
+                                        </div>
+
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i  class="glyphicon glyphicon-time"></i></span>
+                                    </div><!-- input-group -->
+
+                                </div>
 
                             </div>
+                        </div>
 
-                            <!--================== Tuesday ============== -->
+                        <!--================== Thursday ============== -->
 
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
 
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Tuesday
-                                                </label>
-                                            </div>
+                                <div class="form-inline" >
+
+                                    <div class="form-group m-r-15">
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="thursday" value="thursday" type="checkbox">
+                                            <label for="checkbox"> Thursday </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker8" name="thursday_start_time" type="text" class="form-control">
                                         </div>
 
-                                        <div class="input-group m-b-0">
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker4" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker9" name="thursday_end_time"  type="text" class="form-control">
                                         </div>
 
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div><!-- input-group -->
 
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker5" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
                                 </div>
-
 
                             </div>
+                        </div>
 
+                        <!--================== Friday ============== -->
 
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
 
-                            <!--================== Wednesday ============== -->
+                                <div class="form-inline">
 
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
+                                    <div class="form-group m-r-15">
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="friday" value="friday" type="checkbox">
+                                            <label for="checkbox"> Friday </label>
+                                        </div>
+                                    </div>
 
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Wednesday
-                                                </label>
-                                            </div>
+                                    <div class="input-group m-b-0">
+
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker10" name="fridday_start_time" type="text" class="form-control">
+                                        </div>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker11" name="fridday_end_time" type="text" class="form-control">
                                         </div>
 
-                                        <div class="input-group m-b-0">
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div><!-- input-group -->
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker6" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker7" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
                                 </div>
-
 
                             </div>
+                        </div>
 
+                        <!--================== Saturday ============== -->
 
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
 
+                                <div class="form-inline" >
 
-                            <!--================== Thursday ============== -->
+                                    <div class="form-group m-r-15">
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="saturday" value="saturday" type="checkbox">
+                                            <label for="checkbox"> Saturday </label>
+                                        </div>
+                                    </div>
 
-
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
-
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Thursday
-                                                </label>
-                                            </div>
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker12" name="saturday_start_time" type="text" class="form-control">
                                         </div>
 
-                                        <div class="input-group m-b-0">
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker8" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker13" name="saturday_end_time" type="text" class="form-control">
                                         </div>
 
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div><!-- input-group -->
 
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker9" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
                                 </div>
-
 
                             </div>
+                        </div>
 
+                        <!--================== Sunday ============== -->
 
+                        <div class="row m-b-30">
+                            <div class="col-sm-12">
 
+                                <div class="form-inline" >
 
+                                    <div class="form-group m-r-15">
+                                        <div class="checkbox checkbox-inverse checkbox-circle">
+                                            <input id="checkbox-15" name="sunday" value="sunday" type="checkbox">
+                                            <label for="checkbox"> Sunday </label>
+                                        </div>
+                                    </div>
 
-
-                            <!--================== Friday ============== -->
-
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
-
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Friday
-                                                </label>
-                                            </div>
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker14" name="sunday_start_time" type="text" class="form-control">
                                         </div>
 
-                                        <div class="input-group m-b-0">
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
 
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker10" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
+                                    <div class="input-group m-b-0">
+                                        <span class="text-muted  font-12">TO</span>
+                                    </div>
+
+                                    <div class="input-group m-b-0">
+                                        <div class="bootstrap-timepicker">
+                                            <input id="timepicker15" type="text"  name="sunday_end_time" class="form-control">
                                         </div>
 
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div><!-- input-group -->
 
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker11" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
                                 </div>
-
-
-                            </div>
-
-
-
-
-
-
-                            <!--================== Saturday ============== -->
-
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
-
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Saturday
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker12" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker13" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
-                                </div>
-
-
-                            </div>
-
-
-
-
-
-                            <!--================== Sunday ============== -->
-
-
-                            <div class="row m-b-30">
-                                <div class="col-sm-12">
-                                    <form class="form-inline" role="form">
-
-                                        <div class="form-group m-r-15">
-                                            <div class="checkbox checkbox-inverse checkbox-circle">
-                                                <input id="checkbox-15" type="checkbox">
-                                                <label for="checkbox">
-                                                    Sunday
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker14" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <span class="text-muted  font-12">TO</span>
-                                        </div>
-
-
-
-                                        <div class="input-group m-b-0">
-
-                                            <div class="bootstrap-timepicker">
-                                                <input id="timepicker15" type="text" class="form-control">
-                                            </div>
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i
-                                                    class="glyphicon glyphicon-time"></i></span>
-                                        </div><!-- input-group -->
-
-
-                                    </form>
-                                </div>
-
 
                             </div>
 
                         </div>
 
                     </div>
-                </div><!-- end row -->
 
+                </div>
 
+            </div><!-- end row -->
 
+            <div class="row">
+                <div class="col-lg-12">
 
+                    <div class="card-box">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-box">
-                            <h4 class="m-t-0 header-title"><b>Description*</b></h4>
-                            <p class="text-muted font-13 m-b-30">
-                                Tell us Someting About you
-                            </p>
+                        <h4 class="m-t-0 header-title"><b>description*</b></h4>
+                        <p class="text-muted font-13 m-b-30"> Tell us Someting About you </p>
 
-                            <form action="#">
-
-                                <div class="form-group">
-                                    <textarea type="address" name="adress" parsley-trigger="change" required
-                                        placeholder="Enter Description" class="form-control" id="Address"></textarea>
-                                </div>
-
-                            </form>
-
+                        <div class="form-group">
+                            <textarea type="address" name="adress" parsley-trigger="change" required placeholder="Enter Description" class="form-control" id="Address"></textarea>
                         </div>
 
                     </div>
-                </div><!-- end row -->
 
+                </div>
+            </div><!-- end row -->
 
+            <div class="row">
 
+                <div class="col-md-12 portlets">
 
-                <div class="row">
-                    <div class="col-md-12 portlets">
-                        <!-- Your awesome content goes here -->
-                        <div class="m-b-30">
-                            <form action="#" class="dropzone" id="dropzone">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-
-                            </form>
-
+                    <!-- Your awesome content goes here -->
+                    <div class="m-b-30">
+                         <div class="fallback">
+                            <input name="file" type="file" multiple />
                         </div>
                     </div>
-                </div><!-- end row -->
+
+                </div>
+
+            </div><!-- end row -->
+
+        </form>  
+
+    </div> <!-- end container -->
+
+</div>
+<!-- end wrapper -->
 
 
 <%- include(`../partials/footer`) %>
