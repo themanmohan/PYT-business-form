@@ -1,6 +1,12 @@
 <%- include(`../partials/head`) %>
 
 <link rel="stylesheet" type="text/css" href="/styles/businessForm.css">
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+  type="text/css"
+/>
 
 <%- include(`../partials/head-end`) %>
 
@@ -460,15 +466,17 @@
                 <div class="col-md-12 portlets dropzone"   id="dropzone dropzon-section">
 
                     <!-- Your awesome content goes here -->
-                    <div class="m-b-30">
-                         <div class="fallback">
-                            <input name="file" type="file" multiple />
-                        </div>
+                    <div class="my-dropzone">
+
                     </div>
 
                 </div>
 
             </div><!-- end row -->
+
+            <div class="my-dropzone">
+re
+            </div>
 
             <input type="submit" value="submit" class="btn btn-primary">
 
@@ -479,6 +487,11 @@
     
 </div>
 <!-- end wrapper -->
+
+<script>
+    // Dropzone has been added as a global variable.
+    const dropzone = new Dropzone("div.my-dropzone", { url: "/file/post" });
+</script>
 
 
 <%- include(`../partials/footer`) %>
