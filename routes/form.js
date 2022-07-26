@@ -1,7 +1,9 @@
 const router = require(`express`).Router(),
+    middleware = require(`../middleware/businessForm`),
     controllers = require(`../controllers/form`);
 
-router.get(`/`,
+router.get(`/:postID`,
+    middleware.fetchPost,
     controllers.renderNewBusinessFormPage
 );
 

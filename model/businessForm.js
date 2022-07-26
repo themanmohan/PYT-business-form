@@ -1,4 +1,4 @@
-const mongoose  = require(`mongoose`);
+const mongoose = require(`mongoose`);
 
 const businessFormSchema = new mongoose.Schema({
 
@@ -17,15 +17,22 @@ const businessFormSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    time: {
-        startTime:{
-            type: String,
-            required: true
-        },
-        endTime:{
-            type: String,
-            required: true
-        }
+    timing: {
+
+        type: [{
+            day: {
+                type: String,
+                required: true
+            },
+            open_at: {
+                type: String,
+                required: true
+            },
+            close_at : {
+                type: String,
+                required
+            }
+        }]
     },
     media: {
         gallery: {
@@ -35,7 +42,7 @@ const businessFormSchema = new mongoose.Schema({
             }]
         }
     },
-    contact_number:{
+    contact_number: {
         type: Number,
         required: true
     },
@@ -44,15 +51,14 @@ const businessFormSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    intrest :{
-        type:[{
+    intrest: {
+        type: [{
             type: String,
-            required:true
+            required: true
         }]
     }
 
-
-},{
+}, {
     timestamps: true
 })
 

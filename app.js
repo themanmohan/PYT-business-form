@@ -13,6 +13,8 @@ const express = require(`express`),
 const loadMongoose = require(`./config/mongoose`);
 loadMongoose(mongoose);
 
+
+
 //view engine
 app.set(`view engine`, `ejs`);
 
@@ -40,4 +42,4 @@ app.use(express.json())
 const routes = require(`./routes/_all`);
 app.use(routes);
 
-app.listen(process.env.PORT, () => console.log(`[ Rental App ] running on ${ process.env.PORT }`));
+app.listen(process.env.PORT, () => console.log(`[ Business Form App ] running on ${ process.env.PORT }`));

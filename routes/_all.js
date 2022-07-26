@@ -12,6 +12,6 @@ router.use((req, res, next) => {
 
 const businessFormRoutes = require(`./form`);
 
-router.use(`/business-form`, businessFormRoutes),
+router.use(`/business-form/postdetail`, businessFormRoutes),
 
 module.exports = router;

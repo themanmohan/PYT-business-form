@@ -13,10 +13,10 @@ module.exports = (mongoose) => {
     const mongoURLToUse = isDevMode ? mongoURL.dev : mongoURL.prod,
         dbToUse = isDevMode ? mainDbName.dev : mainDbName.prod;
 
-    mongoose.connect(mongoURLToUse, {
+    mongoose.connect("mongodb://localhost/PYT-2019", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        dbName: dbToUse,
+      
     })
     .then((data) => console.log(`[ ${ dbToUse } ] DB Connected`))
     .catch((err) => {
