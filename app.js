@@ -13,7 +13,7 @@ const express = require(`express`),
 const loadMongoose = require(`./config/mongoose`);
 loadMongoose(mongoose);
 
-
+require(`./model/businessForm`);
 
 //view engine
 app.set(`view engine`, `ejs`);

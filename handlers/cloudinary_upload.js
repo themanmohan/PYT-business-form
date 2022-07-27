@@ -7,6 +7,7 @@ cloudinary.config({
 });
 
 const uploadToCloudinary = async (array, file, folder) => {
+
   const optionsObj = {
     folder: folder,
     use_filename: true,
@@ -19,6 +20,7 @@ const uploadToCloudinary = async (array, file, folder) => {
       return array.push(response.secure_url);
     }
   });
+  
 };
 
 module.exports = async (req, uploadPath, next) => {

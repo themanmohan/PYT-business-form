@@ -17,33 +17,37 @@ const businessFormSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    timing: {
+    // timing: {
+
+    //     type: [{
+    //         day: {
+    //             type: String,
+    //             required: true
+    //         },
+    //         open_at: {
+    //             type: String,
+    //             required: true
+    //         },
+    //         close_at: {
+    //             type: String,
+    //         }
+    //     }]
+    // },
+    media: {
 
         type: [{
-            day: {
-                type: String,
-                required: true
-            },
-            open_at: {
-                type: String,
-                required: true
-            },
-            close_at : {
-                type: String,
-                required
-            }
+            type: String,
+            required: true,
         }]
-    },
-    media: {
-        gallery: {
-            type: [{
-                type: String,
-                required: true,
-            }]
-        }
+
     },
     contact_number: {
         type: Number,
+        required: true
+    },
+
+    email: {
+        type: String,
         required: true
     },
 

@@ -2,11 +2,29 @@ import modal from "./resources/modal";
 import getFormData from "./resources/getFormData";
 import showToast from "../handlers/toastAlerts";
 import { isValidEmailAddress } from '../util/verifications';
+import fetchReqConfig from "./config/fetchReq";
+import handleFetchErrors from "../handlers/handleFetchErrors";
+import standardFetchResponses from "../handlers/standardFetchResponses";
 import Dropzone from "dropzone";
 
 document.onload = function () {
     handlingBusinessForm();
     checkingBusinessEmail();
+
+    Dropzone.autoDiscover = false;
+
+    var myDropzone = new Dropzone(".dropzone", {
+      autoProcessQueue: false,
+      maxFiles: 100,
+      acceptedFiles: ".jpeg,.jpg,.png,.gif"
+    });
+  
+  
+    const dd = document.querySelector('#uploadfiles');
+    dd.addEventListener(`click`, () => {
+      myDropzone.processQueue();
+    })
+
 }();
 
 
@@ -30,6 +48,8 @@ function checkingBusinessEmail(){
         </div>`
 
     );
+
+  
 
 
 const businessEmailVerificationForm = document.querySelector(`#email-verification-form`);
@@ -64,9 +84,21 @@ const businessEmailVerificationForm = document.querySelector(`#email-verificatio
 
             return;
         
-        } else {
-            modal.hide(bussinessFormEmailModal)
-        }
+        } 
+
+        fetch(`/business-form/checkemail?email=${emailAddress}`, {
+            ...fetchReqConfig,
+            method: `GET`
+        })
+        .then(handleFetchErrors)
+        .then((res)=>{
+            if(res.status === `success` && res.exist === true ){
+                window.location.href = `/business-form/postdetail`
+            } else {
+                modal.hide(bussinessFormEmailModal)
+            }
+        })
+        .catch(standardFetchResponses.error);
 
     })
 

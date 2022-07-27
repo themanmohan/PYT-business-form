@@ -6,7 +6,7 @@ const path = require(`path`),
 const configObj = {
     entry: {
     
-        'business-form': [ ...entryDependancies, `./src/businessForm.js` ]
+        'business-form': [ ...entryDependancies, `./src/businessForm.js` ],
   
     },
     output: {
@@ -27,6 +27,7 @@ const configObj = {
         }]
     }
 }
+
 
 if(process.env.MODE === `dev`) configObj.devtool = 'source-map';
 

@@ -6,3 +6,28 @@ exports.renderNewBusinessFormPage = (req,res,next)=>{
     });
 
 }
+
+
+exports.renderIndexPage = (req,res,next)=>{
+
+    return res.render(`form/index`, {
+        docTitle: `sdbfjdf`,
+    });
+
+}
+
+
+
+exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
+    return res.status(Number(200)).json({
+        status: `success`
+    });
+}
+
+exports.sendCheckingEmailExistsSuccessResponse = (req,res,next) =>{
+    return res.status(Number(200)).json({
+        status: `success`,
+        exist:  req.exist ,
+        redirect_uri:`/subscriptions/update`,
+    });
+}

@@ -4,14 +4,26 @@ const router = require(`express`).Router(),
     uploadMulterFilesToCloudinary = require(`../handlers/cloudinary_upload`),
     controllers = require(`../controllers/form`);
 
-const mediaUploadFields = [{ name: `images`,}];
+const mediaUploadFields = [{ name: `file`,}];
 
-router.get(`/:postID`,
-    uploadImage.fields(mediaUploadFields),
-    (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
+router.get(`/checkemail`,
+    middleware.checkAlreadyExistEmail,
+    controllers.sendCheckingEmailExistsSuccessResponse
+    )
+
+router.get(`/postdetail`, controllers.renderIndexPage)
+
+router.get(`/postdetail/:postID`,
     middleware.fetchPost,
     controllers.renderNewBusinessFormPage
 );
+
+router.post(`/postdetail`,
+    uploadImage.fields(mediaUploadFields),
+    (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
+    middleware.createBusinessFormInDB,
+    controllers.sendBusinessFormCreationSuccessResponse,
+)
 
 
 module.exports = router;
