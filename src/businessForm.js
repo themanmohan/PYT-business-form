@@ -8,8 +8,13 @@ import standardFetchResponses from "../handlers/standardFetchResponses";
 import {confirmUserAction} from "./resources/util/confirmUserAction";
 
 document.onload = function () {
+    const businessForm = document.querySelector(`#business-form`),
+    formDataID = businessForm.dataset.listingId;
+    if(!formDataID){
+        checkingBusinessEmail();
+    }
+   
     handlingBusinessForm();
-    checkingBusinessEmail();
 
 }();
 
