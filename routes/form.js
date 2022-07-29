@@ -11,7 +11,7 @@ router.get(`/checkemail`,
     controllers.sendCheckingEmailExistsSuccessResponse
 )
 
-router.get(`/postdetail`,
+router.get(`/postdetail/`,
     middleware.fetchingFormDataAndRenderOnIndexPage,
     controllers.renderIndexPage
 )
@@ -26,7 +26,7 @@ router.get(`/postdetail/:postID`,
     controllers.renderNewBusinessFormPage
 );
 
-router.post(`/postdetail`,
+router.post(`/new`,
     uploadImage.fields(mediaUploadFields),
     (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
     middleware.createBusinessFormInDB,

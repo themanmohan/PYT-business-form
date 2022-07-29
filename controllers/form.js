@@ -1,3 +1,5 @@
+const { sendSuccessJSONResponse } = require(`../handlers/jsonResponseHandlers`);
+
 exports.renderNewBusinessFormPage = (req,res,next)=>{
 
     return res.render(`form/new.ejs`, {
@@ -27,10 +29,20 @@ exports.renderEditFormDataPage = (req,res,next)=>{
 
 
 
+
 exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
-    return res.status(Number(200)).json({
-        status: `success`
+    
+    let successMsg = `form  Created Successfully`;
+
+    // For edit requests
+    if (req.params.id) successMsg = `User details edited`;
+    console.log(req.redirectUrl)
+
+    return sendSuccessJSONResponse(res, {
+        message: successMsg,
+        redirect_uri: req.redirectUrl
     });
+
 }
 
 exports.sendCheckingEmailExistsSuccessResponse = (req,res,next) =>{

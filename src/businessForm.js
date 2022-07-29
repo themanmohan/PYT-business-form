@@ -5,25 +5,11 @@ import { isValidEmailAddress } from '../util/verifications';
 import fetchReqConfig from "./config/fetchReq";
 import handleFetchErrors from "../handlers/handleFetchErrors";
 import standardFetchResponses from "../handlers/standardFetchResponses";
-import Dropzone from "dropzone";
+import {confirmUserAction} from "./resources/util/confirmUserAction";
 
 document.onload = function () {
     handlingBusinessForm();
     checkingBusinessEmail();
-
-    // Dropzone.autoDiscover = false;
-
-    // var myDropzone = new Dropzone(".dropzone", {
-    //     autoProcessQueue: false,
-    //     maxFiles: 100,
-    //     acceptedFiles: ".jpeg,.jpg,.png,.gif"
-    // });
-
-
-    // const dd = document.querySelector('#uploadfiles');
-    // dd.addEventListener(`click`, () => {
-    //     myDropzone.processQueue();
-    // })
 
 }();
 
@@ -166,12 +152,15 @@ function handlingBusinessForm() {
     });
 
 
-    const businessForm = document.querySelector(`#business-form`);
+    const businessForm = document.querySelector(`#business-form`),
+        formDataID = businessForm.dataset.listingId;
+        console.log()
 
-    businessForm.addEventListener(`submit`, (e) => {
+
+    businessForm.addEventListener(`submit`, async (e) => {
 
         e.preventDefault();
-        
+
         const businessFormData = getFormData(businessForm);
 
         const missingData = [],
@@ -223,6 +212,24 @@ function handlingBusinessForm() {
             return;
 
         }
+
+        console.log(businessFormData)
+
+        if (await confirmUserAction()) {
+         
+                console.log(`shdfjhgsj`)
+
+                fetch(`/business-form/new`, {
+                    ...fetchReqConfig,
+                    body: JSON.stringify(businessFormData)
+                })
+                    .then(handleFetchErrors)
+                    .then(standardFetchResponses.success)
+                    .catch(standardFetchResponses.error);
+
+           
+        }
+
 
     })
 

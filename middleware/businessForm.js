@@ -58,15 +58,28 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 
 }
 
-exports.createBusinessFormInDB = (req, res, next) => {
+exports.createBusinessFormInDB = async(req, res, next) => {
+    console.log(req.body)
+    req.body.email = `kmanmohan032@gmail.com`
 
-    BussinessForm.create(req.body)
-        .then((newAdmin) => {
-            console.log(newAdmin)
+    const bussinessFormData = new BussinessForm(req.body);
 
-            return next();
-        })
-        .catch((err) => console.log(err));
+    const redirectUrl = `/business-form/edit/${bussinessFormData._id}`;
+
+    await bussinessFormData.save();
+    req.redirectUrl = redirectUrl
+
+    console.log(redirectUrl)
+
+    return next();
+
+    // BussinessForm.create(req.body)
+    //     .then((newAdmin) => {
+    //         console.log(newAdmin)
+
+    //         return next();
+    //     })
+    //     .catch((err) => console.log(err));
 }
 
 exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {

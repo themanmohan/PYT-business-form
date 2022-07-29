@@ -21,7 +21,6 @@
     "helmet": "^5.1.1",
     "mongoose": "^6.4.6",
     "multer": "^1.4.5-lts.1",
-    "sweetalert2": "^11.4.24",
     "xss": "^1.0.13"
   },
   "devDependencies": {
@@ -33,6 +32,7 @@
     "notyf": "^3.10.0",
     "regenerator-runtime": "^0.13.7",
     "webpack": "^5.51.1",
-    "webpack-cli": "^4.8.0"
+    "webpack-cli": "^4.8.0",
+    "sweetalert2": "^11.4.24"
   }
 }

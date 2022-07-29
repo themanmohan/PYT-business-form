@@ -29,7 +29,7 @@
 
         </div>
 
-        <form  id="business-form"  action="/business-form/postdetail" class="dropzone" >
+        <form  id="business-form" data-listing-id="<%= businessFormDetail._id %>"   >
 
             <div class="row">
 
@@ -483,26 +483,7 @@
 </div>
 <!-- end wrapper -->
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
-<script type="text/javascript">
 
-  Dropzone.autoDiscover = false;
-
-  var myDropzone = new Dropzone(".dropzone", {
-    autoProcessQueue: false,
-    maxFiles: 100,
-    uploadMultiple: true,
-    parallelUploads: 100,
-    acceptedFiles: ".jpeg,.jpg,.png,.gif"
-  });
-
-
-  const dd = document.querySelector('#uploadfiles');
-  dd.addEventListener(`click`, () => {
-    myDropzone.processQueue();
-  })
-
-</script> -->
 
 
 <%- include(`../partials/footer`) %>
