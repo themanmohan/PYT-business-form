@@ -63,8 +63,9 @@ exports.createBusinessFormInDB = async(req, res, next) => {
     req.body.email = `kmanmohan032@gmail.com`
 
     const bussinessFormData = new BussinessForm(req.body);
+    console.log(bussinessFormData)
 
-    const redirectUrl = `/business-form/edit/${bussinessFormData._id}`;
+    const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email}&formDataID=${bussinessFormData._id}`;
 
     await bussinessFormData.save();
     req.redirectUrl = redirectUrl

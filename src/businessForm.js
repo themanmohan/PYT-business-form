@@ -8,9 +8,9 @@ import standardFetchResponses from "../handlers/standardFetchResponses";
 import {confirmUserAction} from "./resources/util/confirmUserAction";
 
 document.onload = function () {
-    const businessForm = document.querySelector(`#business-form`),
-    formDataID = businessForm.dataset.listingId;
-    if(!formDataID){
+    const businessForm1 = document.querySelector(`#business-form`),
+    formDataID1 = businessForm1.dataset.listingId;
+    if(!formDataID1){
         checkingBusinessEmail();
     }
    
@@ -222,15 +222,25 @@ function handlingBusinessForm() {
 
         if (await confirmUserAction()) {
          
-                console.log(`shdfjhgsj`)
+                
 
-                fetch(`/business-form/new`, {
-                    ...fetchReqConfig,
-                    body: JSON.stringify(businessFormData)
-                })
-                    .then(handleFetchErrors)
-                    .then(standardFetchResponses.success)
-                    .catch(standardFetchResponses.error);
+                if(formDataID){
+                    console.log(`edit`)
+
+                } else {
+                    console.log(`create`)
+
+                    fetch(`/business-form/new`, {
+                        ...fetchReqConfig,
+                        body: JSON.stringify(businessFormData)
+                    })
+                        .then(handleFetchErrors)
+                        .then(standardFetchResponses.success)
+                        .catch(standardFetchResponses.error);
+
+                }
+
+
 
            
         }
