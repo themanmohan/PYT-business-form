@@ -4,14 +4,22 @@ const router = require(`express`).Router(),
     uploadMulterFilesToCloudinary = require(`../handlers/cloudinary_upload`),
     controllers = require(`../controllers/form`);
 
-const mediaUploadFields = [{ name: `file`,}];
+const mediaUploadFields = [{ name: `file`, }];
 
 router.get(`/checkemail`,
     middleware.checkAlreadyExistEmail,
     controllers.sendCheckingEmailExistsSuccessResponse
-    )
+)
 
-router.get(`/postdetail`, controllers.renderIndexPage)
+router.get(`/postdetail`,
+    middleware.fetchingFormDataAndRenderOnIndexPage,
+    controllers.renderIndexPage
+)
+
+router.get(`/edit/:formDataID`,
+    middleware.fetchingFormDataByID,
+    controllers.renderEditFormDataPage
+)
 
 router.get(`/postdetail/:postID`,
     middleware.fetchPost,

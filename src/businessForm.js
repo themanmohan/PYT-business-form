@@ -11,19 +11,19 @@ document.onload = function () {
     handlingBusinessForm();
     checkingBusinessEmail();
 
-    Dropzone.autoDiscover = false;
+    // Dropzone.autoDiscover = false;
 
-    var myDropzone = new Dropzone(".dropzone", {
-        autoProcessQueue: false,
-        maxFiles: 100,
-        acceptedFiles: ".jpeg,.jpg,.png,.gif"
-    });
+    // var myDropzone = new Dropzone(".dropzone", {
+    //     autoProcessQueue: false,
+    //     maxFiles: 100,
+    //     acceptedFiles: ".jpeg,.jpg,.png,.gif"
+    // });
 
 
-    const dd = document.querySelector('#uploadfiles');
-    dd.addEventListener(`click`, () => {
-        myDropzone.processQueue();
-    })
+    // const dd = document.querySelector('#uploadfiles');
+    // dd.addEventListener(`click`, () => {
+    //     myDropzone.processQueue();
+    // })
 
 }();
 
@@ -86,15 +86,18 @@ function checkingBusinessEmail() {
 
         }
 
+        console.log(emailAddress)
+
         fetch(`/business-form/checkemail?email=${emailAddress}`, {
             ...fetchReqConfig,
             method: `GET`
         })
             .then(handleFetchErrors)
             .then((res) => {
+                console.log(res)
 
-                if (res.status === `success` && res.exist === true) {
-                    window.location.href = `/business-form/postdetail`
+                if (res.status === `success` && res.businessFormDetail.exist === true) {
+                    window.location.href = `/business-form/postdetail?email=${res.businessFormDetail.email}&formDataID=${res.businessFormDetail.formDataId}`
                 } else {
                     modal.hide(bussinessFormEmailModal)
                 }
