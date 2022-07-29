@@ -14,21 +14,21 @@ document.onload = function () {
     Dropzone.autoDiscover = false;
 
     var myDropzone = new Dropzone(".dropzone", {
-      autoProcessQueue: false,
-      maxFiles: 100,
-      acceptedFiles: ".jpeg,.jpg,.png,.gif"
+        autoProcessQueue: false,
+        maxFiles: 100,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif"
     });
-  
-  
+
+
     const dd = document.querySelector('#uploadfiles');
     dd.addEventListener(`click`, () => {
-      myDropzone.processQueue();
+        myDropzone.processQueue();
     })
 
 }();
 
 
-function checkingBusinessEmail(){
+function checkingBusinessEmail() {
 
     const bussinessFormEmailModal = modal.show(null, [`email-verification-form-wrapper`], `
 
@@ -49,16 +49,16 @@ function checkingBusinessEmail(){
 
     );
 
-  
 
 
-const businessEmailVerificationForm = document.querySelector(`#email-verification-form`);
-    
-    businessEmailVerificationForm.addEventListener(`submit`,(e) => {
+
+    const businessEmailVerificationForm = document.querySelector(`#email-verification-form`);
+
+    businessEmailVerificationForm.addEventListener(`submit`, (e) => {
 
         e.preventDefault();
 
-        const  businessEmailVerificationFormData = getFormData(businessEmailVerificationForm);
+        const businessEmailVerificationFormData = getFormData(businessEmailVerificationForm);
 
         const missingData = [],
             invalidData = [];
@@ -66,10 +66,10 @@ const businessEmailVerificationForm = document.querySelector(`#email-verificatio
         const emailAddress = businessEmailVerificationFormData.email;
 
         if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
-        if ( emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
+        if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
 
         if (missingData.length || invalidData.length) {
-     
+
             if (missingData.length) {
                 showToast.error({
                     message: `Missing Data: ${`<br> - ` + missingData.join(`<br> - `)}`
@@ -83,29 +83,30 @@ const businessEmailVerificationForm = document.querySelector(`#email-verificatio
             }
 
             return;
-        
-        } 
+
+        }
 
         fetch(`/business-form/checkemail?email=${emailAddress}`, {
             ...fetchReqConfig,
             method: `GET`
         })
-        .then(handleFetchErrors)
-        .then((res)=>{
-            if(res.status === `success` && res.exist === true ){
-                window.location.href = `/business-form/postdetail`
-            } else {
-                modal.hide(bussinessFormEmailModal)
-            }
-        })
-        .catch(standardFetchResponses.error);
+            .then(handleFetchErrors)
+            .then((res) => {
+
+                if (res.status === `success` && res.exist === true) {
+                    window.location.href = `/business-form/postdetail`
+                } else {
+                    modal.hide(bussinessFormEmailModal)
+                }
+            })
+            .catch(standardFetchResponses.error);
 
     })
 
 }
 
 
-function handlingBusinessForm(){
+function handlingBusinessForm() {
 
     const mondayTimeCheckbox = document.querySelector(`.monday-time`),
         tuesdayTimeCheckbox = document.querySelector(`.tuesday-time`),
@@ -123,86 +124,87 @@ function handlingBusinessForm(){
         saturdayOpenCloseTimeSection = document.querySelector(`#saturday-open-close-time`),
         sundayOpenCloseTimeSection = document.querySelector(`#sunday-open-close-time`);
 
-        
-
-        mondayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(mondayTimeCheckbox.checked) mondayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  mondayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
-
-        tuesdayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(tuesdayTimeCheckbox.checked) tuesdayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  tuesdayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
 
 
-        wednesdayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(wednesdayTimeCheckbox.checked) wednesdayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  wednesdayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
+    mondayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (mondayTimeCheckbox.checked) mondayOpenCloseTimeSection.classList.add(`open-timing`);
+        else mondayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
 
-        thursdayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(thursdayTimeCheckbox.checked) thursdayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  thursdayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
+    tuesdayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (tuesdayTimeCheckbox.checked) tuesdayOpenCloseTimeSection.classList.add(`open-timing`);
+        else tuesdayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
 
-        fridayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(fridayTimeCheckbox.checked) fridayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  fridayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
 
-        saturdayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(saturdayTimeCheckbox.checked) saturdayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  saturdayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
+    wednesdayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (wednesdayTimeCheckbox.checked) wednesdayOpenCloseTimeSection.classList.add(`open-timing`);
+        else wednesdayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
 
-        sundayTimeCheckbox.addEventListener(`change`, (e) => {
-            if(sundayTimeCheckbox.checked) sundayOpenCloseTimeSection.classList.add(`open-timing`);
-            else  sundayOpenCloseTimeSection.classList.remove(`open-timing`);
-        });
-    
+    thursdayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (thursdayTimeCheckbox.checked) thursdayOpenCloseTimeSection.classList.add(`open-timing`);
+        else thursdayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
+
+    fridayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (fridayTimeCheckbox.checked) fridayOpenCloseTimeSection.classList.add(`open-timing`);
+        else fridayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
+
+    saturdayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (saturdayTimeCheckbox.checked) saturdayOpenCloseTimeSection.classList.add(`open-timing`);
+        else saturdayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
+
+    sundayTimeCheckbox.addEventListener(`change`, (e) => {
+        if (sundayTimeCheckbox.checked) sundayOpenCloseTimeSection.classList.add(`open-timing`);
+        else sundayOpenCloseTimeSection.classList.remove(`open-timing`);
+    });
+
 
     const businessForm = document.querySelector(`#business-form`);
 
-    businessForm.addEventListener(`submit`,(e) => {
+    businessForm.addEventListener(`submit`, (e) => {
 
         e.preventDefault();
+        
         const businessFormData = getFormData(businessForm);
 
-        const  missingData = [],
+        const missingData = [],
             invalidData = [];
 
         const locationName = businessFormData.location_name;
 
-        if(!locationName) missingData.push(`location name`);
-        else if( locationName && typeof locationName !== 'string') invalidData.push(`location name`);
+        if (!locationName) missingData.push(`location name`);
+        else if (locationName && typeof locationName !== 'string') invalidData.push(`location name`);
 
-        if(!businessFormData.city) missingData.push(`city`);
-        else if( businessFormData.city && typeof businessFormData.city !== 'string') invalidData.push(`city`);
+        if (!businessFormData.city) missingData.push(`city`);
+        else if (businessFormData.city && typeof businessFormData.city !== 'string') invalidData.push(`city`);
 
-        if(!businessFormData.country) missingData.push(`country`);
-        else if(businessFormData.country && typeof businessFormData.country !== 'string') invalidData.push(`country`);
+        if (!businessFormData.country) missingData.push(`country`);
+        else if (businessFormData.country && typeof businessFormData.country !== 'string') invalidData.push(`country`);
 
-        if(!businessFormData.address) missingData.push(`address`);
-        else if( businessFormData.address && typeof businessFormData.address !== 'string') invalidData.push(`address`);
+        if (!businessFormData.address) missingData.push(`address`);
+        else if (businessFormData.address && typeof businessFormData.address !== 'string') invalidData.push(`address`);
 
-        if(!businessFormData.interests) missingData.push(`interests`);
-        else if(businessFormData.interests && typeof businessFormData.interests !== 'string') invalidData.push(`interests`);
+        if (!businessFormData.interests) missingData.push(`interests`);
+        else if (businessFormData.interests && typeof businessFormData.interests !== 'string') invalidData.push(`interests`);
 
-        if(!businessFormData.contact_number) missingData.push(`Contact number`);
-        else if( businessFormData.contact_number && isNaN(businessFormData.contact_number)) invalidData.push(`Contact number`);
+        if (!businessFormData.contact_number) missingData.push(`Contact number`);
+        else if (businessFormData.contact_number && isNaN(businessFormData.contact_number)) invalidData.push(`Contact number`);
 
-        if(!businessFormData.address) missingData.push(`address`);
-        else if(businessFormData.address && typeof businessFormData.address !== 'string') invalidData.push(`address`);
+        if (!businessFormData.address) missingData.push(`address`);
+        else if (businessFormData.address && typeof businessFormData.address !== 'string') invalidData.push(`address`);
 
-        if(!businessFormData.website) missingData.push(`website`);
-        else if(businessFormData.website &&  !String(businessFormData.website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
+        if (!businessFormData.website) missingData.push(`website`);
+        else if (businessFormData.website && !String(businessFormData.website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
 
-        if(!businessFormData.description) missingData.push(`description`);
-        else if(businessFormData.description && typeof businessFormData.description !== 'string') invalidData.push(`description`);
+        if (!businessFormData.description) missingData.push(`description`);
+        else if (businessFormData.description && typeof businessFormData.description !== 'string') invalidData.push(`description`);
 
         if (missingData.length || invalidData.length) {
-     
+
             if (missingData.length) {
                 showToast.error({
                     message: `Missing Data: ${`<br> - ` + missingData.join(`<br> - `)}`
@@ -216,9 +218,9 @@ function handlingBusinessForm(){
             }
 
             return;
-        
+
         }
 
     })
-    
+
 }
