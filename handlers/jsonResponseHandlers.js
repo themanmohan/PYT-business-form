@@ -12,7 +12,6 @@ exports.sendSuccessJSONResponse = (res=null, data=null, httpStatusCode=null) => 
 }
 
 exports.sendFailureJSONResponse = (res=null, data=null, httpStatusCode=200) => {
-    performChecks(res, httpStatusCode);
 
     return res.status(Number(httpStatusCode)).json({
         status: `fail`,

@@ -29,6 +29,7 @@ router.get(`/postdetail/:postID`,
 router.post(`/new`,
     uploadImage.fields(mediaUploadFields),
     (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
+    middleware.validateFormData,
     middleware.createBusinessFormInDB,
     controllers.sendBusinessFormCreationSuccessResponse,
 )

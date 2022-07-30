@@ -31,9 +31,9 @@ exports.fetchPost = (req, res, next) => {
 
 exports.checkAlreadyExistEmail = (req, res, next) => {
 
-    const email = String(req.query.email);
-
-    BussinessForm.findOne({ email })
+    const email_address = String(req.query.email);
+  
+    BussinessForm.findOne({ email_address })
         .then((businessFormData) => {
 
             let businessFormDetail = {};
@@ -44,7 +44,7 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
                 businessFormDetail = {
 
                     exist: true,
-                    email: businessFormData.email ? businessFormData.email : null,
+                    email: businessFormData.email_address ? businessFormData.email_address : null,
                     formDataId: businessFormData._id ? businessFormData._id : null,
                 }
             } else {
@@ -62,10 +62,10 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 }
 
 
-exports.validateFormData = () => {
+exports.validateFormData = (req,res, next) => {
+    console.log(req.body)
 
     const {
-
         location_name,
         city,
         country,
@@ -106,18 +106,20 @@ exports.validateFormData = () => {
 
     } = req.body;
 
+    console.log(req.body)
+
     const missingData = [],
         invalidData = [];
 
-    if (req.method === `POST`
-        && !(req.files
-            && req.files.gallery
-            && req.files.gallery.length
-            && req.files.gallery.every((mediaFile) => Boolean(mediaFile.location)))) {
+    // if (req.method === `POST`
+    //     && !(req.files
+    //         && req.files.gallery
+    //         && req.files.gallery.length
+    //         && req.files.gallery.every((mediaFile) => Boolean(mediaFile.location)))) {
 
-        // POST method means it's a new listing (and new listings must have item_gallery images)
-        missingData.push(`item images`);
-    }
+    //     // POST method means it's a new listing (and new listings must have item_gallery images)
+    //     missingData.push(`item images`);
+    // }
 
     if (!(location_name && (typeof location_name === `string`) && location_name.trim())) missingData.push(`location name`);
     if (!(city && (typeof city === `string`) && city.trim())) missingData.push(`city`);
@@ -133,6 +135,7 @@ exports.validateFormData = () => {
 
     if (!website) missingData.push(`website`);
     else if(website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
+    console.log(missingData,invalidData )
 
 
     if(missingData.length || invalidData.length){
@@ -241,6 +244,10 @@ exports.validateFormData = () => {
         if(businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
         req.businessFormDataObj = businessFormDataObj;
+
+        console.log(businessFormDataObj)
+
+        return next()
 
     }
 

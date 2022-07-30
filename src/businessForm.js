@@ -57,7 +57,7 @@ function checkingBusinessEmail() {
         const emailAddress = businessEmailVerificationFormData.email;
 
         if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
-        if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
+        if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address!`);
 
         if (missingData.length || invalidData.length) {
 
@@ -225,6 +225,11 @@ function handlingBusinessForm() {
 
         }
 
+        const businessFormDataObj ={
+            ...businessFormData,
+            email_address: emailAddress
+        }
+
         if (await confirmUserAction()) {
          
             
@@ -236,7 +241,7 @@ function handlingBusinessForm() {
 
                     fetch(`/business-form/new`, {
                         ...fetchReqConfig,
-                        body: JSON.stringify(businessFormData)
+                        body: JSON.stringify(businessFormDataObj)
                     })
                         .then(handleFetchErrors)
                         .then(standardFetchResponses.success)
