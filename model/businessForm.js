@@ -24,11 +24,11 @@ const businessFormSchema = new mongoose.Schema({
     //             type: String,
     //             required: true
     //         },
-    //         open_at: {
+    //         open_timing: {
     //             type: String,
     //             required: true
     //         },
-    //         close_at: {
+    //         close_timing: {
     //             type: String,
     //         }
     //     }]
@@ -46,7 +46,7 @@ const businessFormSchema = new mongoose.Schema({
         required: true
     },
 
-    email: {
+    email_address: {
         type: String,
         required: true
     },
@@ -55,7 +55,7 @@ const businessFormSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    intrest: {
+    interests: {
         type: [{
             type: String,
             required: true

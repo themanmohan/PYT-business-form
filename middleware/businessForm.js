@@ -1,7 +1,10 @@
+const req = require("express/lib/request");
 
 const mongoose = require(`mongoose`),
     fetchAPI = require(`../util/fetchAPI`),
     BussinessForm = mongoose.model(`bussinessForm`),
+    {isValidEmailAddress} = require(`../util/verifications`),
+    { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     axios = require(`axios`);
 
 
@@ -58,7 +61,192 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 
 }
 
-exports.createBusinessFormInDB = async(req, res, next) => {
+
+exports.validateFormData = () => {
+
+    const {
+
+        location_name,
+        city,
+        country,
+        address,
+        contact_number,
+        email_address,
+        website,
+        interests,
+
+        monday,
+        monday_start_time,
+        monday_end_time,
+
+        tuesday,
+        tuesday_start_time,
+        tuesday_end_time,
+
+        wednesday,
+        wednesday_start_time,
+        wednesday_end_time,
+
+        thursday,
+        thursday_start_time,
+        thursday_end_time,
+
+        friday,
+        friday_start_time,
+        friday_end_time,
+
+        saturday,
+        saturday_start_time,
+        saturday_end_time,
+
+        sunday,
+        sunday_start_time,
+        sunday_end_time
+
+
+    } = req.body;
+
+    const missingData = [],
+        invalidData = [];
+
+    if (req.method === `POST`
+        && !(req.files
+            && req.files.gallery
+            && req.files.gallery.length
+            && req.files.gallery.every((mediaFile) => Boolean(mediaFile.location)))) {
+
+        // POST method means it's a new listing (and new listings must have item_gallery images)
+        missingData.push(`item images`);
+    }
+
+    if (!(location_name && (typeof location_name === `string`) && location_name.trim())) missingData.push(`location name`);
+    if (!(city && (typeof city === `string`) && city.trim())) missingData.push(`city`);
+    if (!(country && (typeof country === `string`) && country.trim())) missingData.push(`country`);
+    if (!(address && (typeof address === `string`) && address.trim())) missingData.push(`address`);
+    if (!(interests && (typeof interests === `string`) && address.trim())) missingData.push(`interests`);
+
+    if (!contact_number) missingData.push(`contact number`);
+    else if(contact_number && isNaN(contact_number)) invalidData(`contact number`)
+
+    if (!email_address) missingData.push(`email address`);
+    else if(email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
+
+    if (!website) missingData.push(`website`);
+    else if(website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
+
+
+    if(missingData.length || invalidData.length){
+        const data = {};
+        if(missingData.length) data.missing = missingData;
+        if(invalidData.length) data.invalid = invalidData;
+
+        return sendFailureJSONResponse(res, {
+            ...data,
+            message: `Some data is missing/invalid`
+        });
+
+    } else {
+
+        let businessTimingArray = [];
+
+        if (monday) {
+            const mondayTimingObj = {
+                day: monday,
+                close_timing: monday_start_time,
+                open_timing: monday_end_time,
+            }
+    
+            businessTimingArray.push(mondayTimingObj)
+    
+        } else if (tuesday) {
+    
+            const tuesdayTimingObj = {
+                day: tuesday,
+                close_timing: tuesday_start_time,
+                open_timing: tuesday_end_time,
+            }
+    
+            businessTimingArray.push(tuesdayTimingObj)
+    
+        } else if (wednesday) {
+    
+            const wednesdayTimingObj = {
+                day: wednesday,
+                close_timing: wednesday_start_time,
+                open_timing: wednesday_end_time,
+            }
+    
+            businessTimingArray.push(wednesdayTimingObj)
+    
+        }
+    
+        else if (thursday) {
+    
+            const thursdayTimingObj = {
+                day: thursday,
+                close_timing: thursday_start_time,
+                open_timing: thursday_end_time,
+            }
+    
+            businessTimingArray.push(thursdayTimingObj)
+    
+        }
+    
+        else if (friday) {
+    
+            const fridayTimingObj = {
+                day: friday,
+                close_timing: friday_start_time,
+                open_timing: friday_end_time,
+            }
+    
+            businessTimingArray.push(fridayTimingObj)
+    
+        }
+    
+        else if (saturday) {
+    
+            const saturdayTimingObj = {
+                day: saturday,
+                close_timing: saturday_start_time,
+                open_timing: saturday_end_time,
+            }
+    
+            businessTimingArray.push(saturdayTimingObj)
+    
+        }
+    
+        else if (sunday) {
+    
+            const sundayTimingObj = {
+                day: sunday,
+                close_timing: sunday_start_time,
+                open_timing: sunday_end_time,
+            }
+    
+            businessTimingArray.push(sundayTimingObj)
+        }
+
+
+        let businessFormDataObj = {};
+
+        if(location_name) businessFormDataObj.location_name = location_name;
+        if(city) businessFormDataObj.city = city;
+        if(country) businessFormDataObj.country = country;
+        if(address) businessFormDataObj.address = address;
+        if(contact_number) businessFormDataObj.contact_number = contact_number;
+        if(email_address) businessFormDataObj.email_address = email_address;
+        if(website) businessFormDataObj.website = website;
+        if(interests) businessFormDataObj.interests =  Array.isArray(interests) ? interests : interests.split(`,`)
+        if(businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
+
+        req.businessFormDataObj = businessFormDataObj;
+
+    }
+
+}
+
+exports.createBusinessFormInDB = async (req, res, next) => {
     console.log(req.body)
     req.body.email = `kmanmohan032@gmail.com`
 
@@ -73,14 +261,6 @@ exports.createBusinessFormInDB = async(req, res, next) => {
     console.log(redirectUrl)
 
     return next();
-
-    // BussinessForm.create(req.body)
-    //     .then((newAdmin) => {
-    //         console.log(newAdmin)
-
-    //         return next();
-    //     })
-    //     .catch((err) => console.log(err));
 }
 
 exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {

@@ -85,11 +85,12 @@ function checkingBusinessEmail() {
         })
             .then(handleFetchErrors)
             .then((res) => {
-                console.log(res)
 
                 if (res.status === `success` && res.businessFormDetail.exist === true) {
                     window.location.href = `/business-form/postdetail?email=${res.businessFormDetail.email}&formDataID=${res.businessFormDetail.formDataId}`
                 } else {
+                    // Save data to sessionStorage
+                    sessionStorage.setItem('email_address', emailAddress);
                     modal.hide(bussinessFormEmailModal)
                 }
             })
@@ -200,6 +201,12 @@ function handlingBusinessForm() {
         if (!businessFormData.description) missingData.push(`description`);
         else if (businessFormData.description && typeof businessFormData.description !== 'string') invalidData.push(`description`);
 
+        // Get saved data from sessionStorage
+        const emailAddress = sessionStorage.getItem('email_address');
+
+        if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
+        if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
+
         if (missingData.length || invalidData.length) {
 
             if (missingData.length) {
@@ -218,12 +225,9 @@ function handlingBusinessForm() {
 
         }
 
-        console.log(businessFormData)
-
         if (await confirmUserAction()) {
          
-                
-
+            
                 if(formDataID){
                     console.log(`edit`)
 
