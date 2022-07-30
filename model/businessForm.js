@@ -12,27 +12,38 @@ const businessFormSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+
+    country: {
+        type: String,
+        required: true,
+        trim: true
+    },
     address: {
         type: String,
         required: true,
         trim: true
     },
-    // timing: {
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    timing: {
 
-    //     type: [{
-    //         day: {
-    //             type: String,
-    //             required: true
-    //         },
-    //         open_timing: {
-    //             type: String,
-    //             required: true
-    //         },
-    //         close_timing: {
-    //             type: String,
-    //         }
-    //     }]
-    // },
+        type: [{
+            day: {
+                type: String,
+                required: true
+            },
+            open_timing: {
+                type: String,
+                required: true
+            },
+            close_timing: {
+                type: String,
+            }
+        }]
+    },
     media: {
 
         type: [{

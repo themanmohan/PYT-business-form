@@ -74,6 +74,7 @@ exports.validateFormData = (req,res, next) => {
         email_address,
         website,
         interests,
+        description,
 
         monday,
         monday_start_time,
@@ -126,6 +127,7 @@ exports.validateFormData = (req,res, next) => {
     if (!(country && (typeof country === `string`) && country.trim())) missingData.push(`country`);
     if (!(address && (typeof address === `string`) && address.trim())) missingData.push(`address`);
     if (!(interests && (typeof interests === `string`) && address.trim())) missingData.push(`interests`);
+    if (!(description && (typeof description === `string`) && description.trim())) missingData.push(`description`);
 
     if (!contact_number) missingData.push(`contact number`);
     else if(contact_number && isNaN(contact_number)) invalidData(`contact number`)
@@ -161,7 +163,8 @@ exports.validateFormData = (req,res, next) => {
     
             businessTimingArray.push(mondayTimingObj)
     
-        } else if (tuesday) {
+        } 
+         if (tuesday) {
     
             const tuesdayTimingObj = {
                 day: tuesday,
@@ -171,7 +174,8 @@ exports.validateFormData = (req,res, next) => {
     
             businessTimingArray.push(tuesdayTimingObj)
     
-        } else if (wednesday) {
+        } 
+         if (wednesday) {
     
             const wednesdayTimingObj = {
                 day: wednesday,
@@ -183,7 +187,7 @@ exports.validateFormData = (req,res, next) => {
     
         }
     
-        else if (thursday) {
+         if (thursday) {
     
             const thursdayTimingObj = {
                 day: thursday,
@@ -195,7 +199,7 @@ exports.validateFormData = (req,res, next) => {
     
         }
     
-        else if (friday) {
+         if (friday) {
     
             const fridayTimingObj = {
                 day: friday,
@@ -207,7 +211,7 @@ exports.validateFormData = (req,res, next) => {
     
         }
     
-        else if (saturday) {
+         if (saturday) {
     
             const saturdayTimingObj = {
                 day: saturday,
@@ -219,7 +223,7 @@ exports.validateFormData = (req,res, next) => {
     
         }
     
-        else if (sunday) {
+         if (sunday) {
     
             const sundayTimingObj = {
                 day: sunday,
@@ -240,13 +244,11 @@ exports.validateFormData = (req,res, next) => {
         if(contact_number) businessFormDataObj.contact_number = contact_number;
         if(email_address) businessFormDataObj.email_address = email_address;
         if(website) businessFormDataObj.website = website;
-        if(interests) businessFormDataObj.interests =  Array.isArray(interests) ? interests : interests.split(`,`)
+        if(interests) businessFormDataObj.interests =  Array.isArray(interests) ? interests : interests.split(`,`);
+        if(description) businessFormDataObj.description = description;
         if(businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
         req.businessFormDataObj = businessFormDataObj;
-
-        console.log(businessFormDataObj)
-
         return next()
 
     }
@@ -257,7 +259,7 @@ exports.createBusinessFormInDB = async (req, res, next) => {
     console.log(req.body)
     req.body.email = `kmanmohan032@gmail.com`
 
-    const bussinessFormData = new BussinessForm(req.body);
+    const bussinessFormData = new BussinessForm(req.businessFormDataObj);
     console.log(bussinessFormData)
 
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email}&formDataID=${bussinessFormData._id}`;
