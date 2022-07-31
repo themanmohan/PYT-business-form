@@ -73,27 +73,63 @@
                         </p>
 
                             <div class="form-group">
-                                <label for="CityName">Interests*</label>
+
+                                <% const interestsArrExists = businessFormDetail.interests && businessFormDetail.interests && Array.isArray(businessFormDetail.interests); %>
+
+                                <label for="CityName">Interests* </label>
                                 <p class="text-muted  font-12">Select Category In which your firm lies</p>
-                                <select class="selectpicker m-b-0" name="interests" multiple data-max-options="3"
-                                    data-style="btn-white">
-                                    <option>Food & Wine</option>
-                                    <option>City Life</option>
-                                    <option>Nightlife & Entertainment</option>
-                                    <option>History, Art & Culture</option>
-                                    <option>Nature</option>
-                                    <option>Mountains</option>
-                                    <option>Beaches</option>
-                                    <option>Lakes & Rivers</option>
-                                    <option>Wildlife</option>
-                                    <option>Dunes & Deserts</option>
-                                    <option>Road Trips</option>
-                                    <option>Cruises</option>
-                                    <option>Adventure Sports</option>
-                                    <option>Hotels & Wellness</option>
-                                    <option>Retail Therapy</option>
-                                    <option>Kid Friendly</option>
-                                    <option>Other</option>
+                                <select class="selectpicker m-b-0" name="interests" multiple data-max-options="3" data-style="btn-white">
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Food & Wine`)) ? `selected` : `` %>
+                                    >Food & Wine</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`City Life`)) ? `selected` : `` %>
+                                    >City Life</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Nightlife & Entertainment`)) ? `selected` : `` %>
+                                    >Nightlife & Entertainment</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`History, Art & Culture`)) ? `selected` : `` %>
+                                    >History, Art & Culture</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Nature`)) ? `selected` : `` %>
+                                    >Nature</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Mountains`)) ? `selected` : `` %>
+                                    >Mountains</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Beaches`)) ? `selected` : `` %>
+                                    >Beaches</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Lakes & Rivers`)) ? `selected` : `` %>
+                                    >Lakes & Rivers</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Wildlife`)) ? `selected` : `` %>
+                                    >Wildlife</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Dunes & Deserts`)) ? `selected` : `` %>
+                                    >Dunes & Deserts</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Road Trips`)) ? `selected` : `` %>
+                                    >Road Trips</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Adventure Sports`)) ? `selected` : `` %>
+                                    >Cruises</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Adventure Sports`)) ? `selected` : `` %>
+                                    >Adventure Sports</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Hotels & Wellness`)) ? `selected` : `` %>
+                                    >Hotels & Wellness</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Retail Therapy`)) ? `selected` : `` %>
+                                    >Retail Therapy</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Kid Friendly`)) ? `selected` : `` %>
+                                    >Kid Friendly</option>
+                                    <option
+                                    <%= (interestsArrExists && businessFormDetail.interests.includes(`Other`)) ? `selected` : `` %>
+                                    >Other</option>
                                 </select>
                             </div>
 
