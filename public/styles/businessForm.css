@@ -122,3 +122,40 @@
   object-fit: cover;
   border-radius: 5px;
 }
+
+
+
+/* delete btn */
+.delete-form button{
+  background: none;
+  border: none;
+}
+
+
+form .preview-image{
+  width: 200px;
+  margin: 10px 0 10px 20px;
+  border-radius: 5px;
+}
+form .media-wrapper{
+  display: inline-grid;
+  grid-auto-flow: row;
+}
+form .media-wrapper span{
+  margin: -8px 0 10px 20px; /* matching image's margin */
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: all 0.2s;
+}
+form .media-wrapper span.remove-media{
+  background:red;
+}
+form .media-wrapper span.add-media-back-btn{
+  background: green;
+}

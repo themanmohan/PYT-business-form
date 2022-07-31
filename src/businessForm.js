@@ -6,6 +6,7 @@ import fetchReqConfig from "./config/fetchReq";
 import handleFetchErrors from "../handlers/handleFetchErrors";
 import standardFetchResponses from "../handlers/standardFetchResponses";
 import { confirmUserAction } from "./resources/util/confirmUserAction";
+import mediaDeleteBtns from  "./resources/mediaDeleteBtns";
 
 document.onload = function () {
 
@@ -155,6 +156,10 @@ function handlingBusinessForm() {
     const businessForm = document.querySelector(`#business-form`),
         formDataID = businessForm.dataset.listingId;
 
+        if(formDataID){
+            // i.e. edit category form
+            mediaDeleteBtns.setup();
+        }
 
     businessForm.addEventListener(`submit`, async (e) => {
 
@@ -283,11 +288,26 @@ function handlingBusinessForm() {
 
 
             if (formDataID) {
-                console.log(`edit`)
+               
+                const mediaToBeDeleted = mediaDeleteBtns.getMediaToBeDeletedObj();
+
+                const numberOfItemImages = listingForm.querySelectorAll(`.item-image`).length;
+                    
+
+                if(!itemImagesFileInput.files.length && mediaToBeDeleted.gallery
+                 && (mediaToBeDeleted.gallery.length === numberOfItemImages)){
+
+                    return showToast.error({ message: `Please add new item images if all old images are to be deleted` });
+                }
+
+                
+                for(let key in mediaToBeDeleted){
+                    data.append(`media_to_delete[${ key }]`, mediaToBeDeleted[ key ]);
+                }
+
 
             } else {
-                console.log(`create`)
-
+     
                 fetch(`/business-form/new`, {
                     ...fetchReqConfig,
                     body: data

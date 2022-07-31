@@ -3,7 +3,7 @@ const mongoose = require(`mongoose`),
     fetchAPI = require(`../util/fetchAPI`),
     BussinessForm = mongoose.model(`bussinessForm`),
     Media = mongoose.model(`media`),
-    {isValidEmailAddress} = require(`../util/verifications`),
+    { isValidEmailAddress } = require(`../util/verifications`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     axios = require(`axios`);
 
@@ -17,7 +17,7 @@ exports.fetchPost = (req, res, next) => {
         ...fetchAPI
     })
         .then((postDetail) => {
-   
+
             const post = postDetail.data.data[0];
             req.post = post
             return next();
@@ -33,7 +33,7 @@ exports.fetchPost = (req, res, next) => {
 exports.checkAlreadyExistEmail = (req, res, next) => {
 
     const email_address = String(req.query.email);
-  
+
     BussinessForm.findOne({ email_address })
         .then((businessFormData) => {
 
@@ -63,11 +63,11 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 }
 
 
-exports.validateFormData = async(req,res, next) => {
+exports.validateFormData = async (req, res, next) => {
 
     console.log(req.body)
     console.log(req.cloudinaryFiles)
-    
+
 
     const {
         location_name,
@@ -134,20 +134,20 @@ exports.validateFormData = async(req,res, next) => {
     if (!(description && (typeof description === `string`) && description.trim())) missingData.push(`description`);
 
     if (!contact_number) missingData.push(`contact number`);
-    else if(contact_number && isNaN(contact_number)) invalidData(`contact number`)
+    else if (contact_number && isNaN(contact_number)) invalidData(`contact number`)
 
     if (!email_address) missingData.push(`email address`);
-    else if(email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
+    else if (email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
 
     if (!website) missingData.push(`website`);
-    else if(website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
-    console.log(missingData,invalidData )
+    else if (website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
+    console.log(missingData, invalidData)
 
 
-    if(missingData.length || invalidData.length){
+    if (missingData.length || invalidData.length) {
         const data = {};
-        if(missingData.length) data.missing = missingData;
-        if(invalidData.length) data.invalid = invalidData;
+        if (missingData.length) data.missing = missingData;
+        if (invalidData.length) data.invalid = invalidData;
 
         return sendFailureJSONResponse(res, {
             ...data,
@@ -164,77 +164,77 @@ exports.validateFormData = async(req,res, next) => {
                 close_timing: monday_start_time,
                 open_timing: monday_end_time,
             }
-    
+
             businessTimingArray.push(mondayTimingObj)
-    
-        } 
-         if (tuesday) {
-    
+
+        }
+        if (tuesday) {
+
             const tuesdayTimingObj = {
                 day: tuesday,
                 close_timing: tuesday_start_time,
                 open_timing: tuesday_end_time,
             }
-    
+
             businessTimingArray.push(tuesdayTimingObj)
-    
-        } 
-         if (wednesday) {
-    
+
+        }
+        if (wednesday) {
+
             const wednesdayTimingObj = {
                 day: wednesday,
                 close_timing: wednesday_start_time,
                 open_timing: wednesday_end_time,
             }
-    
+
             businessTimingArray.push(wednesdayTimingObj)
-    
+
         }
-    
-         if (thursday) {
-    
+
+        if (thursday) {
+
             const thursdayTimingObj = {
                 day: thursday,
                 close_timing: thursday_start_time,
                 open_timing: thursday_end_time,
             }
-    
+
             businessTimingArray.push(thursdayTimingObj)
-    
+
         }
-    
-         if (friday) {
-    
+
+        if (friday) {
+
             const fridayTimingObj = {
                 day: friday,
                 close_timing: friday_start_time,
                 open_timing: friday_end_time,
             }
-    
+
             businessTimingArray.push(fridayTimingObj)
-    
+
         }
-    
-         if (saturday) {
-    
+
+        if (saturday) {
+
             const saturdayTimingObj = {
                 day: saturday,
                 close_timing: saturday_start_time,
                 open_timing: saturday_end_time,
             }
-    
+
             businessTimingArray.push(saturdayTimingObj)
-    
+
         }
-    
-         if (sunday) {
-    
+
+        if (sunday) {
+
             const sundayTimingObj = {
                 day: sunday,
                 close_timing: sunday_start_time,
                 open_timing: sunday_end_time,
             }
-    
+
             businessTimingArray.push(sundayTimingObj)
         }
 
@@ -242,7 +242,7 @@ exports.validateFormData = async(req,res, next) => {
         const itemImageEntities = [];
 
 
-        if (req.cloudinaryFiles && req.cloudinaryFiles.gallery && req.cloudinaryFiles.gallery.length ) {
+        if (req.cloudinaryFiles && req.cloudinaryFiles.gallery && req.cloudinaryFiles.gallery.length) {
 
             for (let i = req.cloudinaryFiles.gallery.length - 1; i >= 0; i--) {
                 const itemImageFileEntity = await Media.create({
@@ -261,18 +261,18 @@ exports.validateFormData = async(req,res, next) => {
 
         let businessFormDataObj = {};
 
-        if(location_name) businessFormDataObj.location_name = location_name;
-        if(city) businessFormDataObj.city = city;
-        if(country) businessFormDataObj.country = country;
-        if(address) businessFormDataObj.address = address;
-        if(contact_number) businessFormDataObj.contact_number = contact_number;
-        if(email_address) businessFormDataObj.email_address = email_address;
-        if(website) businessFormDataObj.website = website;
-        if(interests) businessFormDataObj.interests =  Array.isArray(interests) ? interests : interests.split(`,`);
-        if(description) businessFormDataObj.description = description;
-        if(itemImageEntities && itemImageEntities.length) businessFormDataObj.gallery= itemImageEntities;
-        
-        if(businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
+        if (location_name) businessFormDataObj.location_name = location_name;
+        if (city) businessFormDataObj.city = city;
+        if (country) businessFormDataObj.country = country;
+        if (address) businessFormDataObj.address = address;
+        if (contact_number) businessFormDataObj.contact_number = contact_number;
+        if (email_address) businessFormDataObj.email_address = email_address;
+        if (website) businessFormDataObj.website = website;
+        if (interests) businessFormDataObj.interests = Array.isArray(interests) ? interests : interests.split(`,`);
+        if (description) businessFormDataObj.description = description;
+        if (itemImageEntities && itemImageEntities.length) businessFormDataObj.gallery = itemImageEntities;
+
+        if (businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
         req.businessFormDataObj = businessFormDataObj;
         return next()
@@ -285,7 +285,7 @@ exports.createBusinessFormInDB = async (req, res, next) => {
 
     const bussinessFormData = new BussinessForm(req.businessFormDataObj);
     console.log(bussinessFormData)
-  
+
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email_address}&formDataID=${bussinessFormData._id}`;
 
     await bussinessFormData.save();
@@ -322,6 +322,10 @@ exports.fetchingFormDataByID = (req, res, next) => {
     const formDataObjectID = req.params.formDataID;
 
     BussinessForm.findById({ _id: formDataObjectID })
+        .populate({
+            path: `gallery`,
+            select: `resource_url`
+        })
         .then((businessFormDetail) => {
             req.businessFormDetail = businessFormDetail
             return next();
