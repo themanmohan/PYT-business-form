@@ -17,3 +17,12 @@ exports.JSONResponseStatus = (statusText=null) => {
 
     return { isSuccess, isFailure, isError }
 }
+
+
+exports.isAcceptableImageFormat = (format=null) => {
+    if(format && (typeof format === `string`) && format.trim()){
+        const acceptableFormatsRegex = /(jpe?g|png)$/ig;
+
+        return Boolean(format.match(acceptableFormatsRegex));
+    }
+}

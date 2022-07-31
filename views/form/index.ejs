@@ -306,10 +306,10 @@
                             <p class="text-muted m-b-30 font-13"></p>
 
                             <div class="owl-carousel owl-theme" id="owl-multi">
-                                <%if( businessFormDetail && businessFormDetail.media) { %>
-                                    <% businessFormDetail.media.forEach((media)=>{ %>
+                                <%if( businessFormDetail.gallery && businessFormDetail.gallery) { %>
+                                    <% businessFormDetail.gallery.forEach((image)=>{ %>
                                         <div class="item">
-                                            <img src="<%=media%>" />
+                                            <img style="height: 130px;" src="<%=image.resource_url%>" />
                                         </div>
                                         <%}) %>
 

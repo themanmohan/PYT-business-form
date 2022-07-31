@@ -1,7 +1,7 @@
 import modal from "./resources/modal";
 import getFormData from "./resources/getFormData";
 import showToast from "../handlers/toastAlerts";
-import { isValidEmailAddress } from '../util/verifications';
+import { isValidEmailAddress, isAcceptableImageFormat } from '../util/verifications';
 import fetchReqConfig from "./config/fetchReq";
 import handleFetchErrors from "../handlers/handleFetchErrors";
 import standardFetchResponses from "../handlers/standardFetchResponses";
@@ -154,7 +154,6 @@ function handlingBusinessForm() {
 
     const businessForm = document.querySelector(`#business-form`),
         formDataID = businessForm.dataset.listingId;
-    console.log()
 
 
     businessForm.addEventListener(`submit`, async (e) => {
@@ -165,6 +164,8 @@ function handlingBusinessForm() {
 
         const missingData = [],
             invalidData = [];
+
+        let isDataPerfect = true;
 
         const locationName = businessFormData.location_name;
 
@@ -195,13 +196,44 @@ function handlingBusinessForm() {
         if (!businessFormData.description) missingData.push(`description`);
         else if (businessFormData.description && typeof businessFormData.description !== 'string') invalidData.push(`description`);
 
+        // Validating item_gallery images
+        const itemImagesFileInput = businessForm.querySelector(`input#gallery`);
+
+        console.log(itemImagesFileInput)
+
+        if (!formDataID && !(itemImagesFileInput && itemImagesFileInput.files.length)) {
+            isDataPerfect = false;
+            showToast.error({ message: `Please provide location image(s) ` });
+        }
+        else {
+            try {
+                for (let i = itemImagesFileInput.files.length - 1; i >= 0; i--) {
+                    const itemImageFile = itemImagesFileInput.files[i];
+
+                    if (itemImageFile) {
+                        if (!isAcceptableImageFormat(itemImageFile.type)) {
+                            isDataPerfect = false;
+                            showToast.error({ message: `Invalid file format for item images(s)` });
+
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (err) {
+                isDataPerfect = false;
+                showToast.error({ message: `Error validating item images` });
+            }
+        }
+
+    
         // Get saved data from sessionStorage
         const emailAddress = sessionStorage.getItem('email_address');
 
         if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
         if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
 
-        if (missingData.length || invalidData.length) {
+        if (!isDataPerfect || missingData.length || invalidData.length) {
 
             if (missingData.length) {
                 showToast.error({
@@ -224,7 +256,30 @@ function handlingBusinessForm() {
             email_address: emailAddress
         }
 
+          // Removing content-type header -> https://stackoverflow.com/questions/49692745/express-using-multer-error-multipart-boundary-not-found-request-sent-by-pos
+          delete fetchReqConfig.headers['Content-Type'];
+
         if (await confirmUserAction()) {
+
+            const data = new FormData;
+
+            if(itemImagesFileInput && itemImagesFileInput.files.length){
+                for(let i=0; i < itemImagesFileInput.files.length; i++){
+
+                    data.append(`gallery`, itemImagesFileInput.files[i]);
+                }
+            }
+
+
+            for(let key in businessFormDataObj){
+                if(Array.isArray(businessFormDataObj[ key ])){
+                    data.append(key, JSON.stringify(businessFormDataObj[ key ]));
+                }
+                else{
+                    data.append(key, businessFormDataObj[ key ]);
+                }
+            }
+
 
 
             if (formDataID) {
@@ -235,7 +290,7 @@ function handlingBusinessForm() {
 
                 fetch(`/business-form/new`, {
                     ...fetchReqConfig,
-                    body: JSON.stringify(businessFormDataObj)
+                    body: data
                 })
                     .then(handleFetchErrors)
                     .then(standardFetchResponses.success)

@@ -2,6 +2,7 @@
 const mongoose = require(`mongoose`),
     fetchAPI = require(`../util/fetchAPI`),
     BussinessForm = mongoose.model(`bussinessForm`),
+    Media = mongoose.model(`media`),
     {isValidEmailAddress} = require(`../util/verifications`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     axios = require(`axios`);
@@ -16,8 +17,7 @@ exports.fetchPost = (req, res, next) => {
         ...fetchAPI
     })
         .then((postDetail) => {
-            console.log(postDetail.data)
-
+   
             const post = postDetail.data.data[0];
             req.post = post
             return next();
@@ -63,8 +63,11 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 }
 
 
-exports.validateFormData = (req,res, next) => {
+exports.validateFormData = async(req,res, next) => {
+
     console.log(req.body)
+    console.log(req.cloudinaryFiles)
+    
 
     const {
         location_name,
@@ -236,6 +239,26 @@ exports.validateFormData = (req,res, next) => {
         }
 
 
+        const itemImageEntities = [];
+
+
+        if (req.cloudinaryFiles && req.cloudinaryFiles.gallery && req.cloudinaryFiles.gallery.length ) {
+
+            for (let i = req.cloudinaryFiles.gallery.length - 1; i >= 0; i--) {
+                const itemImageFileEntity = await Media.create({
+                    type: 1,
+                    resource_url: req.cloudinaryFiles.gallery[i]
+                });
+
+
+                itemImageEntities.unshift(itemImageFileEntity._id);
+            }
+        }
+
+        console.log(itemImageEntities)
+
+
+
         let businessFormDataObj = {};
 
         if(location_name) businessFormDataObj.location_name = location_name;
@@ -247,6 +270,8 @@ exports.validateFormData = (req,res, next) => {
         if(website) businessFormDataObj.website = website;
         if(interests) businessFormDataObj.interests =  Array.isArray(interests) ? interests : interests.split(`,`);
         if(description) businessFormDataObj.description = description;
+        if(itemImageEntities && itemImageEntities.length) businessFormDataObj.gallery= itemImageEntities;
+        
         if(businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
         req.businessFormDataObj = businessFormDataObj;
@@ -259,8 +284,9 @@ exports.validateFormData = (req,res, next) => {
 exports.createBusinessFormInDB = async (req, res, next) => {
 
     const bussinessFormData = new BussinessForm(req.businessFormDataObj);
+    console.log(bussinessFormData)
   
-    const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email}&formDataID=${bussinessFormData._id}`;
+    const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email_address}&formDataID=${bussinessFormData._id}`;
 
     await bussinessFormData.save();
     req.redirectUrl = redirectUrl
@@ -274,8 +300,13 @@ exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {
         formDataID = req.query.formDataID;
 
 
-    BussinessForm.findOne({ _id: formDataID, email })
+    BussinessForm.findOne({ _id: formDataID })
+        .populate({
+            path: `gallery`,
+            select: `resource_url`
+        })
         .then((businessFormDetail) => {
+            console.log(businessFormDetail)
             req.businessFormDetail = businessFormDetail
             return next();
 

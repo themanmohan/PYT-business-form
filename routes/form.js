@@ -4,7 +4,10 @@ const router = require(`express`).Router(),
     uploadMulterFilesToCloudinary = require(`../handlers/cloudinary_upload`),
     controllers = require(`../controllers/form`);
 
-const mediaUploadFields = [{ name: `file`, }];
+
+const fileUploads = [
+    { name: 'gallery' }
+];
 
 router.get(`/checkemail`,
     middleware.checkAlreadyExistEmail,
@@ -27,7 +30,7 @@ router.get(`/postdetail/:postID`,
 );
 
 router.post(`/new`,
-    uploadImage.fields(mediaUploadFields),
+    uploadImage.fields(fileUploads),
     (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
     middleware.validateFormData,
     middleware.createBusinessFormInDB,
