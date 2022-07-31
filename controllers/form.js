@@ -35,8 +35,7 @@ exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
     let successMsg = `form  Created Successfully`;
 
     // For edit requests
-    if (req.params.id) successMsg = `User details edited`;
-    console.log(req.redirectUrl)
+    if (req.params.formDataID) successMsg = `User details edited`;
 
     return sendSuccessJSONResponse(res, {
         message: successMsg,
@@ -46,7 +45,7 @@ exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
 }
 
 exports.sendCheckingEmailExistsSuccessResponse = (req,res,next) =>{
-    console.log(req.businessFormDetail )
+   
     return res.status(Number(200)).json({
         status: `success`,
         businessFormDetail:  req.businessFormDetail ,

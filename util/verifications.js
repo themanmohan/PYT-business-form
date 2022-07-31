@@ -26,3 +26,19 @@ exports.isAcceptableImageFormat = (format=null) => {
         return Boolean(format.match(acceptableFormatsRegex));
     }
 }
+
+exports.isValidMongoObjectID = (mongoose=null, id=null) => {
+    if(mongoose && id){
+        try{
+            const ObjectId = mongoose.Types.ObjectId;
+
+            const casted = new ObjectId(id);
+            const toString = casted.toString();
+
+            return (id === toString);
+        }
+        catch(err){
+            return false;
+        }
+    }
+}

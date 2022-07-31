@@ -302,18 +302,20 @@
                     <div class="col-sm-12 col-lg-12 col-md-12">
                         <div class="card-box">
 
-                            <h4 class=" m-t-0 header-title"><b>Pictures of Location</b></h4>
+                            <h4 class=" m-t-0 header-title"><b>Pictures of Location<%=businessFormDetail.media.gallery.length%></b></h4>
                             <p class="text-muted m-b-30 font-13"></p>
 
-                            <div class="owl-carousel owl-theme" id="owl-multi">
-                                <%if( businessFormDetail.gallery && businessFormDetail.gallery) { %>
-                                    <% businessFormDetail.gallery.forEach((image)=>{ %>
+                            <div class="owl-carousel owl-theme">
+
+                                <%if( businessFormDetail && businessFormDetail.media) { %>
+                                    <% businessFormDetail.media.gallery.forEach((image)=>{ %>
                                         <div class="item">
                                             <img style="height: 130px;" src="<%=image.resource_url%>" />
                                         </div>
-                                        <%}) %>
+                                  
+                                    <%}) %>
 
-                                            <%} %>
+                                <%} %>
 
                             </div>
                         </div>
@@ -380,69 +382,24 @@
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             //owl carousel
-            $("#owl-slider").owlCarousel({
-                loop: true,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 4000,
-                autoplayHoverPause: true,
-                animateOut: 'fadeOut',
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            });
-
-            $("#owl-slider-2").owlCarousel({
-                loop: false,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 4000,
-                autoplayHoverPause: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            });
 
             //Owl-Multi
-            $('#owl-multi').owlCarousel({
-                loop: true,
-                margin: 20,
-                nav: false,
-                autoplay: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    480: {
-                        items: 2
-                    },
-                    700: {
-                        items: 4
-                    },
-                    1000: {
-                        items: 3
-                    },
-                    1100: {
-                        items: 5
-                    }
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
                 }
-            })
+            }
+        })
         });
 
     </script>

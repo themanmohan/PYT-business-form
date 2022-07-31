@@ -460,10 +460,10 @@
 
                     <div class="card-box">
 
-                        <label for="item_gallery">Item Images:</label>
-                        <input type="file" name="item_gallery" id="item_gallery" type="image/*" multiple/>
+                        <label for="gallery">Item Images:</label>
+                        <input type="file" name="gallery" id="gallery" type="image/*" multiple/>
         
-                        <% businessFormDetail.gallery.forEach((image) => { %>
+                        <% businessFormDetail.media.gallery.forEach((image) => { %>
                         <section class="media-wrapper">
                             <img style="height: 130px;" src="<%= image.resource_url %>" class="preview-image lazy item-image">
                             <span class="remove-media" data-media-category="gallery" data-media-id="<%= image._id %>">delete</span>
@@ -473,10 +473,23 @@
 
                 </div>
             </div><!-- end row -->
+          
+            
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card-box">
+
+                        <button class="btn btn-primary" type="submit"> Submit</button>
+                    </div>
+
+                </div>
+            </div><!-- end row -->
+
 
         </form> 
         
-        <input type="button" id='uploadfiles' value='Upload Files'>
+
 
     </div> <!-- end container -->
 

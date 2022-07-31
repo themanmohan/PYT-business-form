@@ -5,6 +5,7 @@ const mongoose = require(`mongoose`),
     Media = mongoose.model(`media`),
     { isValidEmailAddress } = require(`../util/verifications`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
+    deleteMediaDocumentsFromDB = require(`../util/deleteMediaDocumentsFromDB`),
     axios = require(`axios`);
 
 
@@ -38,10 +39,8 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
         .then((businessFormData) => {
 
             let businessFormDetail = {};
-            console.log(Object.keys(businessFormDetail).length)
-
+   
             if (businessFormData) {
-                console.log(`working`)
                 businessFormDetail = {
 
                     exist: true,
@@ -65,10 +64,7 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 
 exports.validateFormData = async (req, res, next) => {
 
-    console.log(req.body)
-    console.log(req.cloudinaryFiles)
-
-
+   
     const {
         location_name,
         city,
@@ -111,7 +107,7 @@ exports.validateFormData = async (req, res, next) => {
 
     } = req.body;
 
-    console.log(req.body)
+ 
 
     const missingData = [],
         invalidData = [];
@@ -141,8 +137,6 @@ exports.validateFormData = async (req, res, next) => {
 
     if (!website) missingData.push(`website`);
     else if (website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
-    console.log(missingData, invalidData)
-
 
     if (missingData.length || invalidData.length) {
         const data = {};
@@ -255,9 +249,6 @@ exports.validateFormData = async (req, res, next) => {
             }
         }
 
-        console.log(itemImageEntities)
-
-
 
         let businessFormDataObj = {};
 
@@ -270,7 +261,9 @@ exports.validateFormData = async (req, res, next) => {
         if (website) businessFormDataObj.website = website;
         if (interests) businessFormDataObj.interests = Array.isArray(interests) ? interests : interests.split(`,`);
         if (description) businessFormDataObj.description = description;
-        if (itemImageEntities && itemImageEntities.length) businessFormDataObj.gallery = itemImageEntities;
+        if (itemImageEntities && itemImageEntities.length) businessFormDataObj.media = {
+            gallery : itemImageEntities
+        }
 
         if (businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
@@ -284,7 +277,6 @@ exports.validateFormData = async (req, res, next) => {
 exports.createBusinessFormInDB = async (req, res, next) => {
 
     const bussinessFormData = new BussinessForm(req.businessFormDataObj);
-    console.log(bussinessFormData)
 
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email_address}&formDataID=${bussinessFormData._id}`;
 
@@ -294,15 +286,126 @@ exports.createBusinessFormInDB = async (req, res, next) => {
     return next();
 }
 
+exports.editFormDataInDB = (req, res, next) => {
+    const formDataID = req.params.formDataID,
+        businessFormDetail = req.businessFormDataObj;
+
+        BussinessForm.findById(formDataID)
+        .then((listing) => {
+           
+            if(!listing){
+                return sendFailureJSONResponse(res, {
+                    message: `Listing does not exist`
+                });
+            }
+    
+            // Remove media that admin has specified is meant for deletion
+            const { media_to_delete: mediaToDelete } = req.body;
+    
+            for(let key in mediaToDelete){
+                const idsToDelete = mediaToDelete[key].split(`,`);
+    
+                for(let i=idsToDelete.length - 1; i >= 0; i--){
+                    
+                    const indexOfIDToDelete = listing.media[key].findIndex((savedID) => savedID.toString() === idsToDelete[i]);
+    
+                    if(indexOfIDToDelete !== -1){
+                        listing.media[key].splice(indexOfIDToDelete, 1);
+                    }
+                }
+    
+                // Delete old media documents from DB (cleanup)
+                deleteMediaDocumentsFromDB(idsToDelete, mongoose, Media);
+            }
+    
+
+            const itemImagesToUse = [
+                ...listing.media.gallery,
+            ];
+
+            if( businessFormDetail.media){
+                itemImagesToUse.push(...businessFormDetail.media.gallery)
+            }
+
+            return BussinessForm.findByIdAndUpdate(formDataID, {
+                ...businessFormDetail,
+                media: {
+                    gallery: itemImagesToUse
+                }
+            });
+        })
+        .then((updatedListing) => {
+            const redirectUrl = `/business-form/postdetail?email=${updatedListing.email_address}&formDataID=${updatedListing._id}`;
+            req.redirectUrl = redirectUrl;
+            return next()
+        })
+        .catch((err) => {
+            console.log(err)
+            sendErrorJSONResponse(res, `Couldn't connect to database`)
+        });
+
+    // BussinessForm.findById(formDataID)
+    //     .then((listing) => {
+    //         if (!listing) {
+    //             return sendFailureJSONResponse(res, {
+    //                 message: `Listing does not exist`
+    //             });
+    //         }
+
+
+    //         // Remove media that admin has specified is meant for deletion
+    //         const { media_to_delete: mediaToDelete } = req.body;
+
+    //         for (let key in mediaToDelete) {
+    //             const idsToDelete = mediaToDelete[key].split(`,`);
+
+    //             for (let i = idsToDelete.length - 1; i >= 0; i--) {
+
+    //                 const indexOfIDToDelete = listing[key].findIndex((savedID) => savedID.toString() === idsToDelete[i]);
+
+    //                 if (indexOfIDToDelete !== -1) {
+    //                     listing[key].splice(indexOfIDToDelete, 1);
+    //                 }
+    //             }
+
+    //             // Delete old media documents from DB (cleanup)
+    //             deleteMediaDocumentsFromDB(idsToDelete, mongoose, Media);
+    //         }
+
+
+
+    //         const itemImagesToUse = [
+    //             ...listing.gallery,
+    //             ...businessFormDetail.gallery
+    //         ];
+
+
+
+    //         return  BussinessForm.findByIdAndUpdate(formDataID, {
+    //             ...businessFormDetail,
+           
+    //                 gallery: itemImagesToUse
+               
+    //         });
+    //     })
+    //     .then((updatedListing) => next())
+    //     .catch((err) => {
+    //         console.log(err)
+    //     }
+        
+    //     );
+
+}
+
 exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {
 
     const email = String(req.query.email),
         formDataID = req.query.formDataID;
 
 
-    BussinessForm.findOne({ _id: formDataID })
+    BussinessForm.findOne({ _id: formDataID, email_address: email  })
         .populate({
-            path: `gallery`,
+            path: `media.gallery`,
             select: `resource_url`
         })
         .then((businessFormDetail) => {
@@ -323,7 +426,7 @@ exports.fetchingFormDataByID = (req, res, next) => {
 
     BussinessForm.findById({ _id: formDataObjectID })
         .populate({
-            path: `gallery`,
+            path: `media.gallery`,
             select: `resource_url`
         })
         .then((businessFormDetail) => {

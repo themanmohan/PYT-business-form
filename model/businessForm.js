@@ -44,12 +44,14 @@ const businessFormSchema = new mongoose.Schema({
             }
         }]
     },
-    gallery: {
-        type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: `media`
-        }],
-        required: true
+    media: {
+        gallery: {
+            type: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `media`
+            }],
+            required: true
+        }
     },
 
     contact_number: {

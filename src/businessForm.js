@@ -226,6 +226,7 @@ function handlingBusinessForm() {
                 }
             }
             catch (err) {
+                console.log(err)
                 isDataPerfect = false;
                 showToast.error({ message: `Error validating item images` });
             }
@@ -286,12 +287,11 @@ function handlingBusinessForm() {
             }
 
 
-
             if (formDataID) {
                
                 const mediaToBeDeleted = mediaDeleteBtns.getMediaToBeDeletedObj();
 
-                const numberOfItemImages = listingForm.querySelectorAll(`.item-image`).length;
+                const numberOfItemImages = businessForm.querySelectorAll(`.item-image`).length;
                     
 
                 if(!itemImagesFileInput.files.length && mediaToBeDeleted.gallery
@@ -304,6 +304,16 @@ function handlingBusinessForm() {
                 for(let key in mediaToBeDeleted){
                     data.append(`media_to_delete[${ key }]`, mediaToBeDeleted[ key ]);
                 }
+
+
+                fetch(`/business-form/${ formDataID }`, {
+                    ...fetchReqConfig,
+                    method: `PUT`,
+                    body: data
+                })
+                .then(handleFetchErrors)
+                .then(standardFetchResponses.success)
+                .catch(standardFetchResponses.error);
 
 
             } else {

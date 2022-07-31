@@ -38,4 +38,12 @@ router.post(`/new`,
 )
 
 
+router.put(`/:formDataID` ,
+    uploadImage.fields(fileUploads),
+    (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
+    middleware.validateFormData,
+    middleware.editFormDataInDB,
+    controllers.sendBusinessFormCreationSuccessResponse,
+)
+
 module.exports = router;
