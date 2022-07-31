@@ -1,4 +1,3 @@
-const req = require("express/lib/request");
 
 const mongoose = require(`mongoose`),
     fetchAPI = require(`../util/fetchAPI`),
@@ -17,15 +16,17 @@ exports.fetchPost = (req, res, next) => {
         ...fetchAPI
     })
         .then((postDetail) => {
+            console.log(postDetail.data)
 
             const post = postDetail.data.data[0];
             req.post = post
             return next();
         })
         .catch((err) => {
+            console.log(err)
 
-            req.flash(`error`, `Couldn't load admin details`);
-            return res.redirect(`/dashboard`);
+            // req.flash(`error`, `Couldn't load admin details`);
+            // return res.redirect(`/dashboard`);
         });
 }
 
@@ -256,18 +257,13 @@ exports.validateFormData = (req,res, next) => {
 }
 
 exports.createBusinessFormInDB = async (req, res, next) => {
-    console.log(req.body)
-    req.body.email = `kmanmohan032@gmail.com`
 
     const bussinessFormData = new BussinessForm(req.businessFormDataObj);
-    console.log(bussinessFormData)
-
+  
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email}&formDataID=${bussinessFormData._id}`;
 
     await bussinessFormData.save();
     req.redirectUrl = redirectUrl
-
-    console.log(redirectUrl)
 
     return next();
 }
