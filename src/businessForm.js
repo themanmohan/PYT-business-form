@@ -5,15 +5,15 @@ import { isValidEmailAddress } from '../util/verifications';
 import fetchReqConfig from "./config/fetchReq";
 import handleFetchErrors from "../handlers/handleFetchErrors";
 import standardFetchResponses from "../handlers/standardFetchResponses";
-import {confirmUserAction} from "./resources/util/confirmUserAction";
+import { confirmUserAction } from "./resources/util/confirmUserAction";
 
 document.onload = function () {
-    const businessForm1 = document.querySelector(`#business-form`),
-    formDataID1 = businessForm1.dataset.listingId;
-    if(!formDataID1){
-        checkingBusinessEmail();
-    }
-   
+
+    const businessForm = document.querySelector(`#business-form`),
+        formDataID = businessForm.dataset.listingId;
+
+    // checking if edit page thne not showing email input modal
+    if (!formDataID) checkingBusinessEmail();
     handlingBusinessForm();
 
 }();
@@ -41,17 +41,14 @@ function checkingBusinessEmail() {
     );
 
 
-
-
     const businessEmailVerificationForm = document.querySelector(`#email-verification-form`);
 
     businessEmailVerificationForm.addEventListener(`submit`, (e) => {
 
         e.preventDefault();
 
-        const businessEmailVerificationFormData = getFormData(businessEmailVerificationForm);
-
-        const missingData = [],
+        const businessEmailVerificationFormData = getFormData(businessEmailVerificationForm),
+            missingData = [],
             invalidData = [];
 
         const emailAddress = businessEmailVerificationFormData.email;
@@ -77,8 +74,6 @@ function checkingBusinessEmail() {
 
         }
 
-        console.log(emailAddress)
-
         fetch(`/business-form/checkemail?email=${emailAddress}`, {
             ...fetchReqConfig,
             method: `GET`
@@ -95,7 +90,6 @@ function checkingBusinessEmail() {
                 }
             })
             .catch(standardFetchResponses.error);
-
     })
 
 }
@@ -160,7 +154,7 @@ function handlingBusinessForm() {
 
     const businessForm = document.querySelector(`#business-form`),
         formDataID = businessForm.dataset.listingId;
-        console.log()
+    console.log()
 
 
     businessForm.addEventListener(`submit`, async (e) => {
@@ -225,33 +219,33 @@ function handlingBusinessForm() {
 
         }
 
-        const businessFormDataObj ={
+        const businessFormDataObj = {
             ...businessFormData,
             email_address: emailAddress
         }
 
         if (await confirmUserAction()) {
-         
-            
-                if(formDataID){
-                    console.log(`edit`)
-
-                } else {
-                    console.log(`create`)
-
-                    fetch(`/business-form/new`, {
-                        ...fetchReqConfig,
-                        body: JSON.stringify(businessFormDataObj)
-                    })
-                        .then(handleFetchErrors)
-                        .then(standardFetchResponses.success)
-                        .catch(standardFetchResponses.error);
-
-                }
 
 
+            if (formDataID) {
+                console.log(`edit`)
 
-           
+            } else {
+                console.log(`create`)
+
+                fetch(`/business-form/new`, {
+                    ...fetchReqConfig,
+                    body: JSON.stringify(businessFormDataObj)
+                })
+                    .then(handleFetchErrors)
+                    .then(standardFetchResponses.success)
+                    .catch(standardFetchResponses.error);
+
+            }
+
+
+
+
         }
 
 
