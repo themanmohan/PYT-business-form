@@ -81,9 +81,10 @@ function checkingBusinessEmail() {
         })
             .then(handleFetchErrors)
             .then((res) => {
+                console.log(res)
 
-                if (res.status === `success` && res.businessFormDetail.exist === true) {
-                    window.location.href = `/business-form/postdetail?email=${res.businessFormDetail.email}&formDataID=${res.businessFormDetail.formDataId}`
+                if (res.status === `success` && res.data.businessFormDetail.exist === true) {
+                    window.location.href = `/business-form/postdetail?email=${res.data.businessFormDetail.email}&formDataID=${res.data.businessFormDetail.formDataId}`
                 } else {
                     // Save data to sessionStorage
                     sessionStorage.setItem('email_address', emailAddress);

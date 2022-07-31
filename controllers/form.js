@@ -43,8 +43,7 @@ exports.sendBusinessFormCreationSuccessResponse = (req, res, next) => {
 
 exports.sendCheckingEmailExistsSuccessResponse = (req, res, next) => {
    
-    return res.status(Number(200)).json({
-        status: `success`,
+    return sendSuccessJSONResponse(res, {
         businessFormDetail:  req.businessFormDetail
     });
 
