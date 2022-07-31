@@ -1,6 +1,6 @@
 const { sendSuccessJSONResponse } = require(`../handlers/jsonResponseHandlers`);
 
-exports.renderNewBusinessFormPage = (req,res,next)=>{
+exports.renderNewBusinessFormPage = (req, res, next) => {
 
     return res.render(`form/new.ejs`, {
         docTitle:  req.post.location.placeTag ? req.post.location.placeTag : `location name` ,
@@ -9,33 +9,30 @@ exports.renderNewBusinessFormPage = (req,res,next)=>{
 
 }
 
+exports.renderIndexPage = (req,res,next) => {
 
-exports.renderIndexPage = (req,res,next)=>{
     return res.render(`form/index`, {
-        docTitle: `sdbfjdf`,
+        docTitle: req.businessFormDetail.location_name,
         businessFormDetail : req.businessFormDetail
     });
 
 }
 
+exports.renderEditFormDataPage = (req, res, next) => {
 
-exports.renderEditFormDataPage = (req,res,next)=>{
     return res.render(`form/edit`, {
-        docTitle: `Edit Page`,
+        docTitle: req.businessFormDetail.location_name,
         businessFormDetail : req.businessFormDetail
     });
 
 }
 
-
-
-
-exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
+exports.sendBusinessFormCreationSuccessResponse = (req, res, next) => {
     
-    let successMsg = `form  Created Successfully`;
+    let successMsg = `Your Business Detail Created Successfully!`;
 
     // For edit requests
-    if (req.params.formDataID) successMsg = `User details edited`;
+    if (req.params.formDataID) successMsg = `Your Business Detail Edited Successfully!`;
 
     return sendSuccessJSONResponse(res, {
         message: successMsg,
@@ -44,11 +41,11 @@ exports.sendBusinessFormCreationSuccessResponse = (req,res,next) =>{
 
 }
 
-exports.sendCheckingEmailExistsSuccessResponse = (req,res,next) =>{
+exports.sendCheckingEmailExistsSuccessResponse = (req, res, next) => {
    
     return res.status(Number(200)).json({
         status: `success`,
-        businessFormDetail:  req.businessFormDetail ,
-        redirect_uri:`/subscriptions/update`,
+        businessFormDetail:  req.businessFormDetail
     });
+
 }
