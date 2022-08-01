@@ -14,12 +14,14 @@ exports.fetchPost = (req, res, next) => {
     const postID = req.params.postID,
         placeTag = req.query.location;
 
-    axios(`http://localhost:3000/v1/postdetail/${postID}?location=${placeTag}`, {
+    axios(`http://localhost:3000/v1/location-detail/${postID}?location=${placeTag}`, {
         ...fetchAPI
     })
         .then((postDetail) => {
 
-            const post = postDetail.data.data[0];
+            console.log(postDetail)
+
+            const post = postDetail.data.locationDetail;
             req.post = post
             return next();
         })
