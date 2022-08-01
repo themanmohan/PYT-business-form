@@ -1,2 +1,20 @@
 </head>
 <body>
+
+    <% if(messages){ %>
+
+    <%# Flash messages: https://www.npmjs.com/package/express-flash %>
+
+    <div id="flash-msgs">
+        <% for(let flashMsgCategory in messages){ %>
+        
+            <% if(messages[ flashMsgCategory ] && messages[ flashMsgCategory ].length){ %>
+
+                <% messages[ flashMsgCategory ].forEach((msg) => { %>
+                <p class="flash-msg" data-float-type="<%= flashMsgCategory %>"><%= msg %></p>
+                <% }); %>
+                
+            <% } %>
+        <% } %>
+    </div>
+    <% } %>

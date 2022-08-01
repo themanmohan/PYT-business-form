@@ -26,8 +26,8 @@ exports.fetchPost = (req, res, next) => {
         .catch((err) => {
             console.log(err)
 
-            // req.flash(`error`, `Couldn't load admin details`);
-            // return res.redirect(`/dashboard`);
+            req.flash(`error`, `Couldn't load admin details`);
+            return res.redirect(`back`);
         });
 }
 
@@ -132,8 +132,8 @@ exports.validateFormData = async (req, res, next) => {
     if (!contact_number) missingData.push(`contact number`);
     else if (contact_number && isNaN(contact_number)) invalidData(`contact number`)
 
-    if (!email_address) missingData.push(`email address`);
-    else if (email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
+    // if (!email_address) missingData.push(`email address`);
+    // else if (email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
 
     if (!website) missingData.push(`website`);
     else if (website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
@@ -344,56 +344,6 @@ exports.editFormDataInDB = (req, res, next) => {
             sendErrorJSONResponse(res, `Couldn't connect to database`)
         });
 
-    // BussinessForm.findById(formDataID)
-    //     .then((listing) => {
-    //         if (!listing) {
-    //             return sendFailureJSONResponse(res, {
-    //                 message: `Listing does not exist`
-    //             });
-    //         }
-
-
-    //         // Remove media that admin has specified is meant for deletion
-    //         const { media_to_delete: mediaToDelete } = req.body;
-
-    //         for (let key in mediaToDelete) {
-    //             const idsToDelete = mediaToDelete[key].split(`,`);
-
-    //             for (let i = idsToDelete.length - 1; i >= 0; i--) {
-
-    //                 const indexOfIDToDelete = listing[key].findIndex((savedID) => savedID.toString() === idsToDelete[i]);
-
-    //                 if (indexOfIDToDelete !== -1) {
-    //                     listing[key].splice(indexOfIDToDelete, 1);
-    //                 }
-    //             }
-
-    //             // Delete old media documents from DB (cleanup)
-    //             deleteMediaDocumentsFromDB(idsToDelete, mongoose, Media);
-    //         }
-
-
-
-    //         const itemImagesToUse = [
-    //             ...listing.gallery,
-    //             ...businessFormDetail.gallery
-    //         ];
-
-
-
-    //         return  BussinessForm.findByIdAndUpdate(formDataID, {
-    //             ...businessFormDetail,
-           
-    //                 gallery: itemImagesToUse
-               
-    //         });
-    //     })
-    //     .then((updatedListing) => next())
-    //     .catch((err) => {
-    //         console.log(err)
-    //     }
-        
-    //     );
 
 }
 

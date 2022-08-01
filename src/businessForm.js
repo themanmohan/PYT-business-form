@@ -205,8 +205,6 @@ function handlingBusinessForm() {
         // Validating item_gallery images
         const itemImagesFileInput = businessForm.querySelector(`input#gallery`);
 
-        console.log(itemImagesFileInput)
-
         if (!formDataID && !(itemImagesFileInput && itemImagesFileInput.files.length)) {
             isDataPerfect = false;
             showToast.error({ message: `Please provide location image(s) ` });
@@ -236,6 +234,8 @@ function handlingBusinessForm() {
     
         // Get saved data from sessionStorage
         const emailAddress = sessionStorage.getItem('email_address');
+
+        console.log(emailAddress)
 
         if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
         if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
@@ -329,11 +329,7 @@ function handlingBusinessForm() {
 
             }
 
-
-
-
         }
-
 
     })
 

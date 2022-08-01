@@ -5,6 +5,7 @@ const express = require(`express`),
     app = express(),
     helmet = require(`helmet`),
     mongoose = require(`mongoose`),
+    flash = require(`express-flash`),
     expressSession = require(`express-session`),
     MongoStore = require(`connect-mongo`);
 
@@ -17,6 +18,7 @@ require(`./model/businessForm`);
 require(`./model/media`)(mongoose);
 
 //view engine
+app.use(flash());
 app.set(`view engine`, `ejs`);
 
 // App config
