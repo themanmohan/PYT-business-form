@@ -7,6 +7,7 @@ import handleFetchErrors from "../handlers/handleFetchErrors";
 import standardFetchResponses from "../handlers/standardFetchResponses";
 import { confirmUserAction } from "./resources/util/confirmUserAction";
 import mediaDeleteBtns from  "./resources/mediaDeleteBtns";
+import loader from "./resources/loader";
 
 document.onload = function () {
 
@@ -75,13 +76,16 @@ function checkingBusinessEmail() {
 
         }
 
+        const loaderID = loader.show(`Changing status`);
+
         fetch(`/business-form/checkemail?email=${emailAddress}`, {
             ...fetchReqConfig,
             method: `GET`
         })
             .then(handleFetchErrors)
             .then((res) => {
-                console.log(res)
+
+                loader.hide(loaderID)
 
                 if (res.status === `success` && res.data.businessFormDetail.exist === true) {
                     window.location.href = `/business-form/postdetail?email=${res.data.businessFormDetail.email}&formDataID=${res.data.businessFormDetail.formDataId}`
@@ -268,6 +272,8 @@ function handlingBusinessForm() {
 
         if (await confirmUserAction()) {
 
+            const loaderID = loader.show(`LOADING ...`);
+
             const data = new FormData;
 
             if(itemImagesFileInput && itemImagesFileInput.files.length){
@@ -313,7 +319,10 @@ function handlingBusinessForm() {
                     body: data
                 })
                 .then(handleFetchErrors)
-                .then(standardFetchResponses.success)
+                .then((res)=>{
+                    loader.hide(loaderID)
+                    standardFetchResponses.success(res);
+                })
                 .catch(standardFetchResponses.error);
 
 
