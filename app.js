@@ -45,4 +45,8 @@ app.use(express.urlencoded({extended: true,limit: '50mb'}));
 const routes = require(`./routes/_all`);
 app.use(routes);
 
+app.get('*', function(req, res){
+    res.render('404');
+});
+
 app.listen(process.env.PORT, () => console.log(`[ Business Form App ] running on ${ process.env.PORT }`));

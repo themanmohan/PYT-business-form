@@ -22,14 +22,17 @@ exports.fetchPost = (req, res, next) => {
             console.log(postDetail)
 
             const post = postDetail.data.locationDetail;
+            if(!post){
+                req.flash(`error`, `Couldn't load admin details`);
+                return res.redirect(`/`);
+            }
             req.post = post
             return next();
         })
         .catch((err) => {
-            console.log(err)
-
+      
             req.flash(`error`, `Couldn't load admin details`);
-            return res.redirect(`back`);
+            return res.redirect(`*`);
         });
 }
 

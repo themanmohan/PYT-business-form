@@ -34,7 +34,6 @@
 .notyf__ripple{
     border-radius: 0 !important;
     height: 445px !important;
-    background-color: red !important;
 }
 
 .email-verification-form-wrapper .email-verification-form-section {
@@ -60,13 +59,6 @@
     }
 
 }
-
-
-
-
-
-
-
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
