@@ -319,10 +319,7 @@ function handlingBusinessForm() {
                     body: data
                 })
                 .then(handleFetchErrors)
-                .then((res)=>{
-                    loader.hide(loaderID)
-                    standardFetchResponses.success(res);
-                })
+                .then(standardFetchResponses.success)
                 .catch(standardFetchResponses.error);
 
 
