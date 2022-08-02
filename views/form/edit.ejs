@@ -267,8 +267,8 @@
                                         <% let wednesdayTime = businessFormDetail.timing.filter( time => time['day'] === 'wednesday' ) %>
 
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" <%= wednesdayTime && wednesdayTime.length ? `checked`: `` %> class="wednesday-time" class="wednesday" value="wednesday" type="checkbox">
-                                            <label for="checkbox"> Wednesday  </label>
+                                            <input id="checkbox-15" class="wednesday-time" class="wednesday" value="wednesday" type="checkbox" <%= wednesdayTime && wednesdayTime.length ? `checked`: `` %> >
+                                            <label for="checkbox"> Wed  </label>
                                         </div>
 
                                     </div>
