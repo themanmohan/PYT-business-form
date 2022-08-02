@@ -120,6 +120,13 @@ function handlingBusinessForm() {
         sundayOpenCloseTimeSection = document.querySelector(`#sunday-open-close-time`);
 
 
+    if(mondayTimeCheckbox.checked) mondayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(tuesdayTimeCheckbox.checked) tuesdayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(wednesdayTimeCheckbox.checked) wednesdayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(thursdayTimeCheckbox.checked) thursdayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(fridayTimeCheckbox.checked) fridayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(saturdayTimeCheckbox.checked) saturdayOpenCloseTimeSection.classList.add(`open-timing`);
+    if(sundayTimeCheckbox.checked) sundayOpenCloseTimeSection.classList.add(`open-timing`);
 
     mondayTimeCheckbox.addEventListener(`change`, (e) => {
         if (mondayTimeCheckbox.checked) mondayOpenCloseTimeSection.classList.add(`open-timing`);
