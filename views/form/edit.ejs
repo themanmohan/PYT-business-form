@@ -262,22 +262,19 @@
 
                                 <div class="form-inline" >
 
+                                    <% let wednesdayTime = businessFormDetail.timing.filter( time => time['day'] === 'wednesday' ) %>
+
                                     <div class="form-group m-r-15">
-
-                                        <% let wednesdayTime = businessFormDetail.timing.filter( time => time['day'] === 'wednesday' ) %>
-
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="wednesday-time" class="wednesday" value="wednesday" type="checkbox" <%= wednesdayTime && wednesdayTime.length ? `checked`: `` %> >
-                                            <label for="checkbox"> Wed  </label>
+                                            <input id="checkbox-15" <%= wednesdayTime && wednesdayTime.length ? `checked`: `` %> class="wednesday-time" name="wednesday" value="wednesday" type="checkbox">
+                                            <label for="checkbox"> Wed </label>
                                         </div>
-
                                     </div>
 
-                   
                                     <div id="wednesday-open-close-time">
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker6" value="<%= wednesdayTime &&  wednesdayTime.length ?  wednesdayTime[0].open_timing : `` %>" name="wednesday_start_time" type="text" class="form-control">
+                                                <input id="timepicker8" value="<%=wednesdayTime && wednesdayTime.length ? wednesdayTime[0].open_timing : `` %>" name="wednesday_start_time" type="text" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -289,11 +286,12 @@
     
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker7" value="<%= wednesdayTime &&  wednesdayTime.length ?  wednesdayTime[0].close_timing : ``%>" type="text" name="wednesday_start_time" class="form-control">
+                                                <input id="timepicker9" value="<%= wednesdayTime && wednesdayTime.length ? wednesdayTime[0].close_timing : `` %>" name="wednesday_end_time"  type="text" class="form-control">
                                             </div>
     
-                                            <span class="input-group-addon bg-custom b-0 text-white"><i  class="glyphicon glyphicon-time"></i></span>
+                                            <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
                                         </div>
+                                        
                                     </div>
 
                                 </div>
@@ -365,7 +363,7 @@
                                         <div class="input-group m-b-0">
 
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker10" value="<%= fridayTime && fridayTime.length ? fridayTime[0].open_timing : `` %>" name="fridday_start_time" type="text" class="form-control">
+                                                <input id="timepicker10" value="<%= fridayTime && fridayTime.length ? fridayTime[0].open_timing : `` %>" name="friday_start_time" type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
