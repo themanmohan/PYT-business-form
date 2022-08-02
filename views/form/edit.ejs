@@ -169,10 +169,10 @@
                             <div class="col-sm-12">
 
                                 <div class="form-inline">
-                        
+                                    <% let mondayTime = businessFormDetail.timing.filter( time => time['day'] === 'monday' ) %>
                                     <div class="form-group m-r-15">
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="monday-time" name="monday" value="monday" type="checkbox">
+                                            <input id="checkbox-15" <%= mondayTime && mondayTime.length ? `checked`: `` %> class="monday-time" name="monday" value="monday" type="checkbox">
                                             <label for="checkbox"> Monday </label>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
                                         <div class="input-group m-b-0">
 
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker" type="text" name="monday_start_time" class="form-control">
+                                                <input id="timepicker" value="<%= mondayTime && mondayTime ? mondayTime[0].open_timing : `` %>" type="text" name="monday_start_time" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -195,7 +195,7 @@
                                         <div class="input-group m-b-0">
     
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker3" name="monday_end_time"  type="text" class="form-control">
+                                                <input id="timepicker3" name="monday_end_time" value="<%= mondayTime && mondayTime ? mondayTime[0].close_timing : `` %>"  type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -216,9 +216,11 @@
                                 <div class="form-inline">
 
                                     <div class="form-group m-r-15">
+
+                                        <% let tuesdayTime = businessFormDetail.timing.filter( time => time['day'] === 'tuesday' ) %>
                                         
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="tuesday-time" name="tuesday" value="tuesday" type="checkbox"  >
+                                            <input id="checkbox-15" <%= tuesdayTime && tuesdayTime.length ? `checked`: `` %> class="tuesday-time" name="tuesday" value="tuesday" type="checkbox"  >
                                             <label for="checkbox"> Tuesday </label>
                                         </div>
 
@@ -228,20 +230,20 @@
                                         <div class="input-group m-b-0">
 
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker4" name="tuesday_start_time" type="text" class="form-control">
+                                                <input id="timepicker4" name="tuesday_start_time" type="text" value="<%= tuesdayTime && tuesdayTime.length ?  tuesdayTime[0].open_timing : `` %>" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
                                         </div>
     
                                         <div class="input-group m-b-0">
-                                            <span class="text-muted  font-12">TO</span>
+                                            <span class="text-muted  font-12">TO </span>
                                         </div>
     
                                         <div class="input-group m-b-0">
     
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker5" name="tuesday_end_time" type="text" class="form-control">
+                                                <input id="timepicker5"  value="<%= tuesdayTime && tuesdayTime.length ? tuesdayTime[0].close_timing: ``%>" name="tuesday_end_time" type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -262,8 +264,10 @@
 
                                     <div class="form-group m-r-15">
 
+                                        <% let wednesdayTime = businessFormDetail.timing.filter( time => time['day'] === 'wednesday' ) %>
+
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="wednesday-time" class="wednesday" value="wednesday" type="checkbox">
+                                            <input id="checkbox-15" <%= wednesdayTime && wednesdayTime.length ? `checked`: `` %> class="wednesday-time" class="wednesday" value="wednesday" type="checkbox">
                                             <label for="checkbox"> Wednesday  </label>
                                         </div>
 
@@ -273,7 +277,7 @@
                                     <div id="wednesday-open-close-time">
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker6" name="wednesday_start_time" type="text" class="form-control">
+                                                <input id="timepicker6" value="<%= wednesdayTime &&  wednesdayTime.length ?  wednesdayTime[0].open_timing : `` %>" name="wednesday_start_time" type="text" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -285,7 +289,7 @@
     
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker7" type="text" name="wednesday_start_time" class="form-control">
+                                                <input id="timepicker7" value="<%= wednesdayTime &&  wednesdayTime.length ?  wednesdayTime[0].close_timing : ``%>" type="text" name="wednesday_start_time" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i  class="glyphicon glyphicon-time"></i></span>
@@ -304,9 +308,11 @@
 
                                 <div class="form-inline" >
 
+                                    <% let thursdayTime = businessFormDetail.timing.filter( time => time['day'] === 'thursday' ) %>
+
                                     <div class="form-group m-r-15">
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="thursday-time" name="thursday" value="thursday" type="checkbox">
+                                            <input id="checkbox-15" <%= thursdayTime && thursdayTime.length ? `checked`: `` %> class="thursday-time" name="thursday" value="thursday" type="checkbox">
                                             <label for="checkbox"> Thursday </label>
                                         </div>
                                     </div>
@@ -314,7 +320,7 @@
                                     <div id="thursday-open-close-time">
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker8" name="thursday_start_time" type="text" class="form-control">
+                                                <input id="timepicker8" value="<%=thursdayTime && thursdayTime.length ? thursdayTime[0].open_timing : `` %>" name="thursday_start_time" type="text" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -326,7 +332,7 @@
     
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker9" name="thursday_end_time"  type="text" class="form-control">
+                                                <input id="timepicker9" value="<%= thursdayTime && thursdayTime.length ? thursdayTime[0].close_timing : `` %>" name="thursday_end_time"  type="text" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -345,10 +351,12 @@
                             <div class="col-sm-12">
 
                                 <div class="form-inline">
+                                    
+                                    <% const fridayTime = businessFormDetail.timing.filter( time => time['day'] === 'friday' ) %>
 
                                     <div class="form-group m-r-15">
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="friday-time" name="friday" value="friday" type="checkbox">
+                                            <input id="checkbox-15" class="friday-time" <%= fridayTime && fridayTime.length ? `checked`: `` %>  name="friday" value="friday" type="checkbox">
                                             <label for="checkbox"> Friday </label>
                                         </div>
                                     </div>
@@ -357,7 +365,7 @@
                                         <div class="input-group m-b-0">
 
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker10" name="fridday_start_time" type="text" class="form-control">
+                                                <input id="timepicker10" value="<%= fridayTime && fridayTime.length ? fridayTime[0].open_timing : `` %>" name="fridday_start_time" type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -369,7 +377,7 @@
     
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker11" name="friday_end_time" type="text" class="form-control">
+                                                <input id="timepicker11" value="<%= fridayTime && fridayTime.length ? fridayTime[0].close_timing : ``%>" name="friday_end_time" type="text" class="form-control">
                                             </div>
     
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -388,9 +396,11 @@
 
                                 <div class="form-inline" >
 
+                                    <% const saturdayTime = businessFormDetail.timing.filter( time => time['day'] === 'saturday' ) %>
+
                                     <div class="form-group m-r-15">
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="saturday-time" name="saturday" value="saturday" type="checkbox">
+                                            <input id="checkbox-15" <%= saturdayTime && saturdayTime.length ? `checked`: `` %> class="saturday-time" name="saturday" value="saturday" type="checkbox">
                                             <label for="checkbox"> Saturday </label>
                                         </div>
                                     </div>
@@ -399,7 +409,7 @@
 
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker12" name="saturday_start_time" type="text" class="form-control">
+                                                <input id="timepicker12" value="<%= saturdayTime && saturdayTime.length ? saturdayTime[0].open_timing : `` %>" name="saturday_start_time" type="text" class="form-control">
                                             </div>
 
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -411,7 +421,7 @@
 
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker13" name="saturday_end_time" type="text" class="form-control">
+                                                <input id="timepicker13" value="<%= saturdayTime && saturdayTime.length ? saturdayTime[0].close_timing : `` %>" name="saturday_end_time" type="text" class="form-control">
                                             </div>
 
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -431,9 +441,11 @@
 
                                 <div class="form-inline" >
 
+                                    <% let sundayTime = businessFormDetail.timing.filter( time => time['day'] === 'sunday' ) %>
+
                                     <div class="form-group m-r-15">
                                         <div class="checkbox checkbox-inverse checkbox-circle">
-                                            <input id="checkbox-15" class="sunday-time" name="sunday" value="sunday" type="checkbox">
+                                            <input id="checkbox-15" <%= sundayTime && sundayTime.length ? `checked`: `` %> class="sunday-time" name="sunday" value="sunday" type="checkbox">
                                             <label for="checkbox"> Sunday </label>
                                         </div>
                                     </div>
@@ -442,7 +454,7 @@
 
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker14" name="sunday_start_time" type="text" class="form-control">
+                                                <input id="timepicker14" value="<%= sundayTime && sundayTime.length ? sundayTime[0].open_timing : `` %>" name="sunday_start_time" type="text" class="form-control">
                                             </div>
 
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
@@ -454,7 +466,7 @@
 
                                         <div class="input-group m-b-0">
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker15" type="text"  name="sunday_end_time" class="form-control">
+                                                <input id="timepicker15" value="<%= sundayTime && sundayTime.length ? sundayTime[0].close_timing : `` %>" type="text"  name="sunday_end_time" class="form-control">
                                             </div>
 
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
