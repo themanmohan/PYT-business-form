@@ -17,7 +17,7 @@ const notyf = new Notyf({
             type: `success`,
             className: `success-toast`,
             ripple: true,
-            background: `#006400`,
+            background: `#0F9834`,
             icon: {
                 className: `success-toast-icon`,
                 tagName: `i`,
@@ -28,7 +28,7 @@ const notyf = new Notyf({
             type: `error`,
             className: `error-toast`,
             ripple: true,
-            background: `#FF0000.`,
+            background: `#FF0222`,
             icon: {
                 className: `error-toast-icon`,
                 tagName: `i`,
