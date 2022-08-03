@@ -370,3 +370,6 @@ button.slick-next.slick-arrow {
   !important;
 }
 
+#topnav{
+  z-index: 1000000 !important;
+}
