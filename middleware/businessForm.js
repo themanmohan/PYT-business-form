@@ -19,8 +19,6 @@ exports.fetchPost = (req, res, next) => {
     })
         .then((postDetail) => {
 
-            console.log(postDetail)
-
             const post = postDetail.data.locationDetail;
             if(!post){
                 req.flash(`error`, `Couldn't load admin details`);
@@ -107,11 +105,16 @@ exports.validateFormData = async (req, res, next) => {
 
         sunday,
         sunday_start_time,
-        sunday_end_time
+        sunday_end_time,
+
+        pytImages
 
 
     } = req.body;
 
+
+
+    console.log(req.body)
  
 
     const missingData = [],
@@ -266,6 +269,7 @@ exports.validateFormData = async (req, res, next) => {
         if (website) businessFormDataObj.website = website;
         if (interests) businessFormDataObj.interests = Array.isArray(interests) ? interests : interests.split(`,`);
         if (description) businessFormDataObj.description = description;
+        if(pytImages) businessFormDataObj.pytImages = JSON.parse(pytImages);
         if (itemImageEntities && itemImageEntities.length) businessFormDataObj.media = {
             gallery : itemImageEntities
         }
@@ -285,6 +289,7 @@ exports.createBusinessFormInDB = async (req, res, next) => {
 
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email_address}&formDataID=${bussinessFormData._id}`;
 
+    console.log(bussinessFormData)
     await bussinessFormData.save();
     req.redirectUrl = redirectUrl
 
@@ -364,7 +369,7 @@ exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {
             select: `resource_url`
         })
         .then((businessFormDetail) => {
-            console.log(businessFormDetail)
+
             req.businessFormDetail = businessFormDetail
             return next();
 

@@ -54,6 +54,11 @@ const businessFormSchema = new mongoose.Schema({
         }
     },
 
+    pytImages: [{ 
+        type: String,
+        required: true
+     }],
+
     contact_number: {
         type: Number,
         required: true

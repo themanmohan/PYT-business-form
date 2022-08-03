@@ -242,8 +242,6 @@ function handlingBusinessForm() {
         // Get saved data from sessionStorage
         const emailAddress = sessionStorage.getItem('email_address');
 
-        console.log(emailAddress)
-
         if (!(emailAddress && emailAddress.trim())) missingData.push(`email address`)
         if (emailAddress && !isValidEmailAddress(emailAddress)) invalidData.push(`email address`);
 
@@ -265,13 +263,20 @@ function handlingBusinessForm() {
 
         }
 
+    
         const carsolImage = document.querySelectorAll(`#carousel-image-sectio img`);
 
-        console.log(carsolImage)
+        let pytImagesArr = [];
+    
+        for (var i = carsolImage.length - 1; i >= 0; i--) {
+            pytImagesArr.push(carsolImage[i].currentSrc)
+        }
 
+ 
         const businessFormDataObj = {
             ...businessFormData,
-            email_address: emailAddress
+            email_address: emailAddress,
+            pytImages: pytImagesArr
         }
 
           // Removing content-type header -> https://stackoverflow.com/questions/49692745/express-using-multer-error-multipart-boundary-not-found-request-sent-by-pos

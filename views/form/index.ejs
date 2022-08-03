@@ -325,6 +325,35 @@
                 <!--========== Location Info Ends Here ===================!-->
 
 
+                                <!--========== PYT Pictures ===================!-->
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                                        <div class="card-box">
+                
+                                            <h4 class=" m-t-0 header-title"><b>More Gallery</b></h4>
+                                            <p class="text-muted m-b-30 font-13"></p>
+                
+                                            <div class="owl-carousel owl-theme">
+                
+                                                <%if( businessFormDetail && businessFormDetail.pytImages) { %>
+                                                    <% businessFormDetail.pytImages.forEach((imgLink)=>{ %>
+                                                        <div class="item">
+                                                            <img style="height: 130px;" src="<%=imgLink%>" />
+                                                        </div>
+                                                  
+                                                    <%}) %>
+                
+                                                <%} %>
+                
+                                            </div>
+                                        </div>
+                                    </div><!-- col-lg-12 -->
+                                </div><!-- End Row -->
+                
+                                
+
+
 
 
                 <!-- Footer -->
@@ -385,7 +414,8 @@
 
             //Owl-Multi
             $('.owl-carousel').owlCarousel({
-            loop: true,
+                loop: false,
+                rewind: true,
             margin: 10,
             responsive: {
                 0: {
