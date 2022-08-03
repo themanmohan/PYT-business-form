@@ -76,16 +76,12 @@ function checkingBusinessEmail() {
 
         }
 
-        const loaderID = loader.show(`Changing status`);
-
         fetch(`/business-form/checkemail?email=${emailAddress}`, {
             ...fetchReqConfig,
             method: `GET`
         })
             .then(handleFetchErrors)
             .then((res) => {
-
-                loader.hide(loaderID)
 
                 if (res.status === `success` && res.data.businessFormDetail.exist === true) {
                     window.location.href = `/business-form/postdetail?email=${res.data.businessFormDetail.email}&formDataID=${res.data.businessFormDetail.formDataId}`
@@ -268,6 +264,10 @@ function handlingBusinessForm() {
             return;
 
         }
+
+        const carsolImage = document.querySelectorAll(`#carousel-image-sectio img`);
+
+        console.log(carsolImage)
 
         const businessFormDataObj = {
             ...businessFormData,

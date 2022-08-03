@@ -91,8 +91,7 @@
                                     <div class="form-group">
                                         <label for="CityName">Interests*</label>
                                         <p class="text-muted  font-12">Select Category In which your firm lies</p>
-                                        <select class="selectpicker m-b-0" name="interests" multiple
-                                            data-max-options="3" data-style="btn-white">
+                                        <select class="selectpicker m-b-0" name="interests" multipledata-max-options="3" data-style="btn-white">
                                             <option>Food & Wine</option>
                                             <option>City Life</option>
                                             <option>Nightlife & Entertainment</option>
@@ -507,7 +506,7 @@
 
                                         <%if( imageArr) { %>
                                             <% imageArr.forEach((imageLarge)=>{ %>
-                                                <div class="item">
+                                                <div class="item" id="carousel-image-sectio">
                                                     <img style="height: 130px;" src="<%=imageLarge%>" />
                                                 </div>
                                             <%}) %>
