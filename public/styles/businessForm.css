@@ -373,3 +373,7 @@ button.slick-next.slick-arrow {
 #topnav{
   z-index: 1000000 !important;
 }
+
+#contact-number-section{
+  display: grid;
+}

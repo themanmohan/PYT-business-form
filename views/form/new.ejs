@@ -114,16 +114,15 @@
 
 
 
-                                    <div class="form-group">
+                                    <div class="form-group" id="contact-number-section">
                                         <label for="Country">Contact Number*</label>
-                                        <input type="number" name="contact_number" parsley-trigger="change"
-                                            placeholder="Enter Contact Number" class="form-control" id="contact_number">
+                                        <input id="contact_number" name="contact_number" parsley-trigger="change" placeholder="Enter Contact Number" class="form-control" type="number">
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for="Website">Website*</label>
-                                        <p class="text-muted  font-12">Example:www.abcd.com/hotles</p>
+                                        <p class="text-muted  font-12">https://www.example.com</p>
                                         <input type="text" name="website" parsley-trigger="change"
                                             placeholder="Enter Website Link" class="form-control" id="website">
                                     </div>
@@ -682,7 +681,7 @@
 
                                 <div class="card-box">
 
-                                    <label for="item_gallery">Item Images:</label>
+                                    <label for="item_gallery">Add Images:</label>
                                     <input class="form-control" type="file" name="gallery" id="gallery" type="image/*" multiple />
 
                                 </div>
