@@ -53,6 +53,11 @@
             background-color: #212159;
         }
 
+        #image-card-section{
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
         .panel-heading {
             color: #FFE34C;
             background-color: #212159;
@@ -174,15 +179,7 @@
                                                     <div class="body">
                                                         <table class="table">
                                                             <tbody>
-                                                                <!-- <tr class="danger">
-                                                                    <td>Sunday</td>
-                                                                    <td>Close <spa class="close"></spa>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="danger">
-                                                                    <td>Monday</td>
-                                                                    <td>Close</td>
-                                                                </tr> -->
+                                                      
                                                                 <%if(businessFormDetail && businessFormDetail.timing){%>
 
                                                                     <%businessFormDetail.timing.forEach((time)=>{%>
@@ -212,8 +209,8 @@
 
                                 <hr>
 
-                                <p class="m-0 text-dark">Cusine</p>
-                                <h4>Continentelntel</h4>
+                                <p class="m-0 text-dark">Location</p>
+                                <h4>  <%=businessFormDetail && businessFormDetail.location_name ? businessFormDetail.location_name: ``%></h4>
                                 <hr>
 
                                 <p class="m-0 text-dark">Website</p>
@@ -298,9 +295,9 @@
 
                 <!--========== Location Pictures ===================!-->
 
-                <div class="row">
+                <div class="row" >
                     <div class="col-sm-12 col-lg-12 col-md-12">
-                        <div class="card-box">
+                        <div class="card-box" id="image-card-section">
 
                             <h4 class=" m-t-0 header-title"><b>Pictures of Location<%=businessFormDetail.media.gallery.length%></b></h4>
                             <p class="text-muted m-b-30 font-13"></p>
@@ -326,17 +323,17 @@
 
 
                                 <!--========== PYT Pictures ===================!-->
-
+                                <%if( businessFormDetail && businessFormDetail.pytImages && businessFormDetail.pytImages.length ) { %>
                                 <div class="row">
                                     <div class="col-sm-12 col-lg-12 col-md-12">
-                                        <div class="card-box">
+                                        <div class="card-box" id="image-card-section">
                 
                                             <h4 class=" m-t-0 header-title"><b>More Gallery</b></h4>
                                             <p class="text-muted m-b-30 font-13"></p>
                 
                                             <div class="owl-carousel owl-theme">
                 
-                                                <%if( businessFormDetail && businessFormDetail.pytImages) { %>
+                                                
                                                     <% businessFormDetail.pytImages.forEach((imgLink)=>{ %>
                                                         <div class="item">
                                                             <img style="height: 130px;" src="<%=imgLink%>" />
@@ -344,13 +341,13 @@
                                                   
                                                     <%}) %>
                 
-                                                <%} %>
                 
                                             </div>
                                         </div>
                                     </div><!-- col-lg-12 -->
                                 </div><!-- End Row -->
                 
+                                <%} %>
                                 
 
 

@@ -28,6 +28,7 @@ exports.fetchPost = (req, res, next) => {
             return next();
         })
         .catch((err) => {
+            console.log(err)
       
             req.flash(`error`, `Couldn't load admin details`);
             return res.redirect(`*`);
