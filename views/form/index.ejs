@@ -179,8 +179,9 @@
                                                     <div class="body">
                                                         <table class="table">
                                                             <tbody>
+                                                                
                                                       
-                                                                <%if(businessFormDetail && businessFormDetail.timing){%>
+                                                                <%if(businessFormDetail && businessFormDetail.timing && businessFormDetail.timing.length ){%>
 
                                                                     <%businessFormDetail.timing.forEach((time)=>{%>
                                                                         <tr class="success">
@@ -189,7 +190,12 @@
                                                                         </tr>
                                                                     <% }) %>
 
-                                                                <%}%>
+                                                                <% } else { %>
+                                                                    <tr class="success">
+                                                                        <td>Available</td>
+                                                                        <td>24 Hours</td>
+                                                                    </tr>
+                                                                <% } %>
                                                                
                                                          
                                                             </tbody>
@@ -429,6 +435,7 @@
         });
 
     </script>
+
 
 </body>
 

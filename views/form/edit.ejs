@@ -135,7 +135,7 @@
 
 
 
-                            <div class="form-group">
+                            <div class="form-group" id="contact-number-section">
                                 <label for="Country">Contact Number*</label>
                                 <input type="number" name="contact_number" parsley-trigger="change" value="<%= businessFormDetail && businessFormDetail.contact_number ? businessFormDetail.contact_number : ``%>"  placeholder="Enter Contact Number" class="form-control" id="contact_number">
                             </div>
@@ -182,7 +182,7 @@
                                         <div class="input-group m-b-0">
 
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker" value="<%= mondayTime && mondayTime ? mondayTime[0].open_timing : `` %>" type="text" name="monday_start_time" class="form-control">
+                                                <input id="timepicker" value="<%= mondayTime && mondayTime.length ? mondayTime[0].open_timing : `` %>" type="text" name="monday_start_time" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -195,7 +195,7 @@
                                         <div class="input-group m-b-0">
     
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker3" name="monday_end_time" value="<%= mondayTime && mondayTime ? mondayTime[0].close_timing : `` %>"  type="text" class="form-control">
+                                                <input id="timepicker3" name="monday_end_time" value="<%= mondayTime && mondayTime.length  ? mondayTime[0].close_timing : `` %>"  type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -243,7 +243,7 @@
                                         <div class="input-group m-b-0">
     
                                             <div class="bootstrap-timepicker">
-                                                <input id="timepicker5"  value="<%= tuesdayTime && tuesdayTime.length ? tuesdayTime[0].close_timing: ``%>" name="tuesday_end_time" type="text" class="form-control">
+                                                <input id="timepicker5"  value="<%= tuesdayTime && tuesdayTime.length  ? tuesdayTime[0].close_timing: ``%>" name="tuesday_end_time" type="text" class="form-control">
                                             </div>
                                             <span class="input-group-addon bg-custom b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
     
@@ -506,7 +506,7 @@
 
                     <div class="card-box">
 
-                        <label for="gallery">Item Images:</label>
+                        <label for="gallery">Location Images:</label>
                         <input type="file" name="gallery" id="gallery" type="image/*" multiple/>
         
                         <% businessFormDetail.media.gallery.forEach((image) => { %>
