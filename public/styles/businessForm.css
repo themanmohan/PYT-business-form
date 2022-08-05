@@ -378,3 +378,7 @@ button.slick-next.slick-arrow {
   display: grid;
 }
 
+.slideshow{
+  min-height: 230px !important;
+}
+

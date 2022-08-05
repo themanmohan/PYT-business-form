@@ -19,12 +19,15 @@ exports.fetchPost = (req, res, next) => {
     })
         .then((postDetail) => {
 
-            const post = postDetail.data.locationDetail;
+            const post = postDetail.data.data.locationDetail;
+            const locationReviews = postDetail.data.data.fecthCommentForLocation
+            console.log(postDetail.data.data.fecthCommentForLocation[0].userId)
             if(!post){
                 req.flash(`error`, `Couldn't load admin details`);
                 return res.redirect(`/`);
             }
             req.post = post
+            req.locationReviews = locationReviews
             return next();
         })
         .catch((err) => {
