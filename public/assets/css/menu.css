@@ -39,6 +39,7 @@ File: Menu
   margin-top: 8px;
   text-transform: uppercase;
   float: left;
+  margin-bottom: 8px;
 }
 #topnav .topbar-main .logo h1 {
   margin: 0px auto;

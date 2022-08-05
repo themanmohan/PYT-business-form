@@ -402,3 +402,7 @@ button.slick-next.slick-arrow {
   /* The width is the width of the web page */
 }
 
+#submit-btn{
+  display: grid;
+}
+
