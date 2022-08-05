@@ -507,7 +507,7 @@
                                         <%if( imageArr) { %>
                                             <% imageArr.forEach((imageLarge)=>{ %>
                                                 <div class="item" id="carousel-image-sectio">
-                                                    <img style="height: 130px;" src="<%=imageLarge%>" />
+                                                    <img style="height: 130px; border-radius: 5px;" src="<%=imageLarge%>" />
                                                 </div>
                                             <%}) %>
 
@@ -536,7 +536,7 @@
                                                     <div class="content">
                                                         <!-- slide 1 -->
                                                         <div class="thumbnail">
-                                                            
+
                                                             <%if(reviews.userId && reviews.userId.userBasicInfo && reviews.userId.userBasicInfo.profilePicture ){%>
                                                                 <img src="<%=reviews.userId.userBasicInfo.profilePicture%>">
                                                             <%} else {%>

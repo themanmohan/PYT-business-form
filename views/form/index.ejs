@@ -259,10 +259,7 @@
 
                             <div class="col-md-6">
 
-                                <div id="map"><iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95777.5288157847!2d2.0787279470992464!3d41.39476881460054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49816718e30e5%3A0x44b0fb3d4f47660a!2sBarcelona%2C+Spain!5e0!3m2!1sen!2sin!4v1507643730961"
-                                        width="100%" height="450" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe></div>
+                                <div id="map"></div>
 
                             </div>
                             <!-- col-md-6 -->
@@ -313,7 +310,7 @@
                                 <%if( businessFormDetail && businessFormDetail.media) { %>
                                     <% businessFormDetail.media.gallery.forEach((image)=>{ %>
                                         <div class="item">
-                                            <img style="height: 130px;" src="<%=image.resource_url%>" />
+                                            <img style="height: 130px; border-radius: 5px;" src="<%=image.resource_url%>" />
                                         </div>
                                   
                                     <%}) %>
@@ -342,7 +339,7 @@
                                                 
                                                     <% businessFormDetail.pytImages.forEach((imgLink)=>{ %>
                                                         <div class="item">
-                                                            <img style="height: 130px;" src="<%=imgLink%>" />
+                                                            <img style="height: 130px; border-radius: 5px;" src="<%=imgLink%>" />
                                                         </div>
                                                   
                                                     <%}) %>
@@ -410,6 +407,10 @@
 
     <!-- owl carousel js -->
     <script src="/assets/plugins/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+    defer
+  ></script>
 
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
@@ -433,6 +434,24 @@
             }
         })
         });
+
+        // Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  const uluru = { lat: -25.344, lng: 131.031 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+}
+
+window.initMap = initMap;
 
     </script>
 
