@@ -382,3 +382,15 @@ button.slick-next.slick-arrow {
   min-height: 230px !important;
 }
 
+.notyf{
+  z-index: 1000000000000000000000 !important;
+}
+
+.SdClientName,
+.SdClientDesc{
+  text-align: right !important;
+}
+
+.SdClientDesc{
+  margin-top: -10px;
+}
