@@ -14,7 +14,7 @@ exports.fetchPost = (req, res, next) => {
     const postID = req.params.postID,
         placeTag = req.query.location;
 
-    axios(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`, {
+    axios(`http://localhost:3000/v1/location-detail/${postID}?location=${placeTag}`, {
         ...fetchAPI
     })
         .then((postDetail) => {
