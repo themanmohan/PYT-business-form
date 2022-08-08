@@ -14,14 +14,14 @@ exports.fetchPost = (req, res, next) => {
     const postID = req.params.postID,
         placeTag = req.query.location;
 
-    axios(`http://localhost:3000/v1/location-detail/${postID}?location=${placeTag}`, {
+    axios(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`, {
         ...fetchAPI
     })
         .then((postDetail) => {
-
-            const post = postDetail.data.data.locationDetail;
-            const locationReviews = postDetail.data.data.fecthCommentForLocation
-            console.log(postDetail.data.data.fecthCommentForLocation[0].userId)
+ 
+            const post = postDetail.data.data.locationData;
+            const locationReviews = postDetail.data.data.postReviewsData
+           
             if(!post){
                 req.flash(`error`, `Couldn't load admin details`);
                 return res.redirect(`/`);
