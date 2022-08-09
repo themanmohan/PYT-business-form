@@ -23,8 +23,7 @@ exports.fetchPost = (req, res, next) => {
             const locationReviews = postDetail.data.data.postReviewsData
            
             if(!post){
-                req.flash(`error`, `Couldn't load admin details`);
-                return res.redirect(`/`);
+                return res.redirect(`*`);
             }
             req.post = post
             req.locationReviews = locationReviews
@@ -32,8 +31,6 @@ exports.fetchPost = (req, res, next) => {
         })
         .catch((err) => {
             console.log(err)
-      
-            req.flash(`error`, `Couldn't load admin details`);
             return res.redirect(`*`);
         });
 }
