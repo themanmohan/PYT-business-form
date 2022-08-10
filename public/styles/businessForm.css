@@ -406,3 +406,6 @@ button.slick-next.slick-arrow {
   display: grid;
 }
 
+li{
+  list-style: none !important;
+}
