@@ -371,7 +371,7 @@ button.slick-next.slick-arrow {
 }
 
 #topnav{
-  z-index: 1000000 !important;
+  z-index: 10 !important;
 }
 
 #contact-number-section{
