@@ -502,18 +502,17 @@
                                     }) %>
 
 
-                                    <div class="owl-carousel owl-theme">
+                                 
 
+                                    <ul class="owl-carousel">
                                         <%if( imageArr) { %>
                                             <% imageArr.forEach((imageLarge)=>{ %>
-                                                <div class="item" id="carousel-image-sectio">
-                                                    <img style="border-radius: 5px;" src="<%=imageLarge%>" />
-                                                </div>
-                                            <%}) %>
+                                        <li><a class="item" id="carousel-image-sectio" data-fancybox="gallery" href="<%=imageLarge%>" data-caption="Caption1"><img class="imgsize" src="<%=imageLarge%>" alt="01"></a></li>
+                                        <%}) %>
 
                                         <%} %>
 
-                                    </div>
+                                      </ul>
 
                                 </div>
                             </div><!-- col-lg-12 -->
