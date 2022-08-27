@@ -6,6 +6,7 @@ const mongoose = require(`mongoose`),
     { isValidEmailAddress } = require(`../util/verifications`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     deleteMediaDocumentsFromDB = require(`../util/deleteMediaDocumentsFromDB`),
+    CountryCode = require(`../util/countryCodeData.json`);
     axios = require(`axios`);
 
 
@@ -20,13 +21,16 @@ exports.fetchPost = (req, res, next) => {
         .then((postDetail) => {
  
             const post = postDetail.data.data.locationData;
-            const locationReviews = postDetail.data.data.postReviewsData
-           
+            const locationReviews = postDetail.data.data.postReviewsData;
+
+            const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(post.country).toLocaleLowerCase());
+
             if(!post){
                 return res.redirect(`*`);
             }
-            req.post = post
-            req.locationReviews = locationReviews
+            req.post = post;
+            req.locationReviews = locationReviews;
+            req.CountryISOCode = countryWithISOCode.alpha2Code;
             return next();
         })
         .catch((err) => {
@@ -113,10 +117,6 @@ exports.validateFormData = async (req, res, next) => {
 
     } = req.body;
 
-
-
-    console.log(req.body)
- 
 
     const missingData = [],
         invalidData = [];

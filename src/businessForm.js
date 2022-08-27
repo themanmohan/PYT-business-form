@@ -27,7 +27,7 @@ function checkingBusinessEmail() {
 
         <div class="email-verification-form-section">
 
-            <h3>Your Enter Your Email</h3>
+            <h3>Enter Your Email</h3>
 
             <form id="email-verification-form">
                 <div class="form-group">

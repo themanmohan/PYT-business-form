@@ -5,7 +5,8 @@ exports.renderNewBusinessFormPage = (req, res, next) => {
     return res.render(`form/new.ejs`, {
         docTitle:  req.post.placeTag ? req.post.placeTag : `location name` ,
         postDetail: req.post,
-        locationReviews: req.locationReviews
+        locationReviews: req.locationReviews,
+        CountryISOCode: req.CountryISOCode
     });
 
 }
