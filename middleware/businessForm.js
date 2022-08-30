@@ -19,7 +19,7 @@ exports.fetchPost = (req, res, next) => {
         ...fetchAPI
     })
         .then((postDetail) => {
- 
+
             const post = postDetail.data.data.locationData;
             const locationReviews = postDetail.data.data.postReviewsData;
 
@@ -30,7 +30,8 @@ exports.fetchPost = (req, res, next) => {
             }
             req.post = post;
             req.locationReviews = locationReviews;
-            req.CountryISOCode = countryWithISOCode.alpha2Code;
+            req.CountryISOCode = countryWithISOCode[0].alpha2Code ? countryWithISOCode[0].alpha2Code : `IND`;
+            console.log(countryWithISOCode[0].alpha2Code )
             return next();
         })
         .catch((err) => {
