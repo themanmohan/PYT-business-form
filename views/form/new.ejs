@@ -1,7 +1,7 @@
 <%- include(`../partials/head`) %>
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> 
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/styles/businessForm.css">
 
     <%- include(`../partials/head-end`) %>
@@ -90,35 +90,37 @@
                                         We want some of your info to show in our app.
                                     </p>
 
-                            <div class="form-group">
-                                <label for="CityName">Interests*</label>
-                                <p class="text-muted  font-12">Select Category In which your firm lies</p>
-                                <select class="selectpicker m-b-0" name="interests" multiple data-max-options="3" data-style="btn-white">
-                                    <option>Food & Wine</option>
-                                    <option>City Life</option>
-                                    <option>Nightlife & Entertainment</option>
-                                    <option>History, Art & Culture</option>
-                                    <option>Nature</option>
-                                    <option>Mountains</option>
-                                    <option>Beaches</option>
-                                    <option>Lakes & Rivers</option>
-                                    <option>Wildlife</option>
-                                    <option>Dunes & Deserts</option>
-                                    <option>Road Trips</option>
-                                    <option>Cruises</option>
-                                    <option>Adventure Sports</option>
-                                    <option>Hotels & Wellness</option>
-                                    <option>Retail Therapy</option>
-                                    <option>Kid Friendly</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
+                                    <div class="form-group">
+                                        <label for="CityName">Interests*</label>
+                                        <p class="text-muted  font-12">Select Category In which your firm lies</p>
+                                        <select class="selectpicker m-b-0" name="interests" multiple
+                                            data-max-options="3" data-style="btn-white">
+                                            <option>Food & Wine</option>
+                                            <option>City Life</option>
+                                            <option>Nightlife & Entertainment</option>
+                                            <option>History, Art & Culture</option>
+                                            <option>Nature</option>
+                                            <option>Mountains</option>
+                                            <option>Beaches</option>
+                                            <option>Lakes & Rivers</option>
+                                            <option>Wildlife</option>
+                                            <option>Dunes & Deserts</option>
+                                            <option>Road Trips</option>
+                                            <option>Cruises</option>
+                                            <option>Adventure Sports</option>
+                                            <option>Hotels & Wellness</option>
+                                            <option>Retail Therapy</option>
+                                            <option>Kid Friendly</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
 
 
 
                                     <div class="form-group" id="contact-number-section">
                                         <label for="Country">Contact Number*</label>
-                                        <input id="contact_number" name="contact_number"  class="form-control" type="tel">
+                                        <input id="contact_number" name="contact_number" class="form-control"
+                                            type="tel">
                                     </div>
 
 
@@ -497,24 +499,27 @@
                                     <h4 class=" m-t-0 header-title text-center"><b>Pictures of Location</b></h4>
                                     <p class="text-muted m-b-30 font-13"></p>
 
-                                    <% let imageArr = [] %>
+                                    <% let imageArr=[] %>
 
-                                    <% postDetail.postIDs.forEach((postID)=>{
-                                        imageArr.push(...postID.image.imageLarge)
-                                    }) %>
+                                        <% postDetail.postIDs.forEach((postID)=>{
+                                            imageArr.push(...postID.image.imageLarge)
+                                            }) %>
 
 
-                             
 
-                                    <ul class="owl-carousel owl-theme">
-                                        <%if( imageArr) { %>
-                                            <% imageArr.forEach((imageLarge)=>{ %>
-                                        <li><a class="item" id="carousel-image-sectio" data-fancybox="gallery" href="<%=imageLarge%>" data-caption="Caption1"><img class="imgsize" src="<%=imageLarge%>" alt="01"></a></li>
-                                        <%}) %>
 
-                                        <%} %>
+                                            <ul class="owl-carousel owl-theme">
+                                                <%if( imageArr) { %>
+                                                    <% imageArr.forEach((imageLarge)=>{ %>
+                                                        <li><a class="item" id="carousel-image-sectio"
+                                                                data-fancybox="gallery" href="<%=imageLarge%>"
+                                                                data-caption="Caption1"><img class="imgsize"
+                                                                    src="<%=imageLarge%>" alt="01"></a></li>
+                                                        <%}) %>
 
-                                      </ul>
+                                                            <%} %>
+
+                                            </ul>
 
                                 </div>
                             </div><!-- col-lg-12 -->
@@ -522,108 +527,105 @@
 
                         <% if(locationReviews && locationReviews.length) {%>
 
+
+
                             <div class="row">
                                 <div class="col-sm-12 col-lg-12 col-md-12">
-                                    <div class="card-box">
-    
-                                        <h4 class="m-5 header-title text-center"><b>Reviews</b></h4>
-    
-                                        <%locationReviews.forEach((reviews) => { %>
-                                            <div class="sd_master_wrapper">
-                                                <div class="sdtestBg2"></div>
-                                                <div class="sdtestBg3"></div>
-                                                <div class="slideshow">
-        
-                                                    <div class="content">
-                                                        <!-- slide 1 -->
-                                                        <div class="thumbnail">
 
-                                                            <%if(reviews.userId && reviews.userId.userBasicInfo && reviews.userId.userBasicInfo.profilePicture ){%>
-                                                                <img src="<%=reviews.userId.userBasicInfo.profilePicture%>">
-                                                            <%} else {%>
-                                                                <img src="https://farsighttechnologies.com/wp-content/uploads/2020/09/AC.jpg">
-                                                            <%}%>
-                          
-                                                        </div>
-                                                        <div class="btnNtxt">
-                                                            <div class="sdAllContent">
-        
-                                                                <div class="sd_scroll">
-                                                                    <h1 class="sdCustomSliderHeadig">
-                                                                        <%= reviews.commentText%>
-                                                                    </h1>
-                                                                </div>
-                                                                <p class="SdClientName text-right"> <%= reviews.userId && reviews.userId && reviews.userId.userInfo && reviews.userId.userInfo.firstName ? reviews.userId.userInfo.firstName : `` %></p>
-                                                                <p class="SdClientDesc text-right"> <%= reviews.userId && reviews.created_on ?  new Date(reviews.created_on).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })  : `` %> </p>
-                                                            </div>
+                                    <div class="card-box">
+
+                                        <div class="gtco-testimonials">
+                                            <h2>Reviews</h2>
+                                            <div class="owl-carousel owl-carousel1 owl-theme">
+                                                <%locationReviews.forEach((reviews)=> { %>
+                                                <div>
+                                                    <div class="card text-center">
+                                                        <%if(reviews.userId && reviews.userId.userBasicInfo && reviews.userId.userBasicInfo.profilePicture ){%>
+                                                            <img class="card-img-top"  src="<%=reviews.userId.userBasicInfo.profilePicture%>" alt="">
+                                                        <%} %>
+                                                         
+                                                       
+                                                        <div class="card-body">
+                                                            <h5><%= reviews.userId && reviews.userId && reviews.userId.userInfo && reviews.userId.userInfo.firstName ? reviews.userId.userInfo.firstName : `` %> <br />
+                                                                <span> <%= reviews.userId && reviews.created_on ?  new Date(reviews.created_on).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })  : `` %> </span>
+                                                            </h5>
+                                                            <p class="card-text">“<%= reviews.commentText%>” </p>
                                                         </div>
                                                     </div>
-        
-                                            
                                                 </div>
+
+                                                <%})%>
+                                                
                                             </div>
-                                            <div class="spacer"></div>
-                                        <%})%>
-    
-    
+                                        </div>
+
+
+
+
+                                      
+
+                                       
+
+
                                     </div>
                                 </div>
                             </div>
 
-                        <%}%>
-
-                        
-
-                      
+                            <%}%>
 
 
 
 
 
-                        <div class="row">
-                            <div class="col-lg-12">
 
-                                <div class="card-box">
 
-                                    <h4 class="m-t-0 header-title"><b>description*</b></h4>
-                                    <p class="text-muted font-13 m-b-30"> Tell us Someting About you </p>
 
-                                    <div class="form-group">
-                                        <textarea type="description" name="description" parsley-trigger="change"
-                                            placeholder="Enter Description" class="form-control"
-                                            id="description"></textarea>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div class="card-box">
+
+                                            <h4 class="m-t-0 header-title"><b>description*</b></h4>
+                                            <p class="text-muted font-13 m-b-30"> Tell us Someting About you </p>
+
+                                            <div class="form-group">
+                                                <textarea type="description" name="description" parsley-trigger="change"
+                                                    placeholder="Enter Description" class="form-control"
+                                                    id="description"></textarea>
+                                            </div>
+
+                                        </div>
+
                                     </div>
+                                </div><!-- end row -->
 
-                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
 
-                            </div>
-                        </div><!-- end row -->
+                                        <div class="card-box">
 
-                        <div class="row">
-                            <div class="col-lg-12">
+                                            <label for="item_gallery">Add Images:</label>
+                                            <input class="form-control" type="file" name="gallery" id="gallery"
+                                                type="image/*" multiple />
 
-                                <div class="card-box">
+                                        </div>
 
-                                    <label for="item_gallery">Add Images:</label>
-                                    <input class="form-control" type="file" name="gallery" id="gallery" type="image/*" multiple />
-
-                                </div>
-
-                            </div>
-                        </div><!-- end row -->
+                                    </div>
+                                </div><!-- end row -->
 
 
 
-                        <div class="row">
-                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
 
-                                <div class="card-box" id="submit-btn">
+                                        <div class="card-box" id="submit-btn">
 
-                                    <button class="btn btn-primary" type="submit"> Submit</button>
-                                </div>
+                                            <button class="btn btn-primary" type="submit"> Submit</button>
+                                        </div>
 
-                            </div>
-                        </div><!-- end row -->
+                                    </div>
+                                </div><!-- end row -->
 
 
 
