@@ -20,6 +20,8 @@ exports.fetchPost = (req, res, next) => {
     })
         .then((postDetail) => {
 
+            console.log(postDetail.data.data.locationData)
+
             const post = postDetail.data.data.locationData,
                 locationReviews = postDetail.data.data.postReviewsData;
 
@@ -30,8 +32,8 @@ exports.fetchPost = (req, res, next) => {
             }
             req.post = post;
             req.locationReviews = locationReviews;
-            req.CountryISOCode = countryWithISOCode[0].alpha2Code ? countryWithISOCode[0].alpha2Code : `IND`;
-            console.log(countryWithISOCode[0].alpha2Code )
+            req.CountryISOCode = countryWithISOCode && countryWithISOCode[0] && countryWithISOCode[0].alpha2Code ? countryWithISOCode[0].alpha2Code : `IND`;
+  
             return next();
         })
         .catch((err) => {
