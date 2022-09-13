@@ -540,16 +540,16 @@
                                                 <%locationReviews.forEach((reviews)=> { %>
                                                 <div>
                                                     <div class="card text-center">
-                                                        <%if(reviews.userId && reviews.userId.userBasicInfo && reviews.userId.userBasicInfo.profilePicture ){%>
-                                                            <img class="card-img-top"  src="<%=reviews.userId.userBasicInfo.profilePicture%>" alt="">
+                                                        <%if(reviews.userInfo && reviews.userInfo.userBasicInfo && reviews.userInfo.userBasicInfo.profilePicture ){%>
+                                                            <img class="card-img-top"  src="<%=reviews.userInfo.userBasicInfo.profilePicture%>" alt="">
                                                         <%} %>
                                                          
                                                        
                                                         <div class="card-body">
-                                                            <h5><%= reviews.userId && reviews.userId && reviews.userId.userInfo && reviews.userId.userInfo.firstName ? reviews.userId.userInfo.firstName : `` %> <br />
-                                                                <span> <%= reviews.userId && reviews.created_on ?  new Date(reviews.created_on).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })  : `` %> </span>
+                                                            <h5><%=  reviews.userInfo && reviews.userInfo.userInfo && reviews.userInfo.userInfo.firstName ? reviews.userInfo.userInfo.firstName : `` %> <br />
+
                                                             </h5>
-                                                            <p class="card-text">“<%= reviews.commentText%>” </p>
+                                                            <p class="card-text">“<%= reviews.review%>” </p>
                                                         </div>
                                                     </div>
                                                 </div>

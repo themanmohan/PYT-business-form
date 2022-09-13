@@ -20,7 +20,7 @@ exports.fetchPost = (req, res, next) => {
     })
         .then((postDetail) => {
 
-            console.log(postDetail.data.data.locationData)
+            console.log(postDetail.data)
 
             const post = postDetail.data.data.locationData,
                 locationReviews = postDetail.data.data.postReviewsData;
