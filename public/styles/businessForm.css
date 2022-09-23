@@ -496,6 +496,16 @@ li{
   width: 80px;
 }
 
+
+#testimonial_area .owl-prev {
+	left: -60px !important;
+	top: -30px !important;
+}
+#testimonial_area .owl-next {
+	right: -60px !important;
+	top: -30px !important;
+}
+
 @media (max-width: 767px) {
   .gtco-testimonials {
     margin-top: 20px;
