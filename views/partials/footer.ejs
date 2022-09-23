@@ -142,10 +142,11 @@
 
   var carousels = function () {
     $(".owl-carousel1").owlCarousel({
-      loop: true,
-      center: true,
-      responsiveClass: true,
-      loop: false,
+      autoplay: true,
+				slideSpeed:1000,
+				items : 1,
+        center: true,
+				loop: false,
 				nav:true,
 				navText:['<i class="fa fa-arrow-left"></i>','<i class="fa fa-arrow-right"></i>'],
 				margin: 30,
