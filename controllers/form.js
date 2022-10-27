@@ -3,7 +3,7 @@ const { sendSuccessJSONResponse } = require(`../handlers/jsonResponseHandlers`);
 exports.renderNewBusinessFormPage = (req, res, next) => {
 
     return res.render(`form/new.ejs`, {
-        docTitle:  req.post.placeTag ? req.post.placeTag : `location name` ,
+        docTitle:  req.post.placeTag ? req.post.placeTag : `Location Name` ,
         postDetail: req.post,
         locationReviews: req.locationReviews,
         CountryISOCode: req.CountryISOCode

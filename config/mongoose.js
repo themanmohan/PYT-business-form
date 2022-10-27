@@ -4,7 +4,7 @@ const missingPackageLogger = require(`../handlers/missingPackageLogger`),
 
 module.exports = (mongoose) => {
 
-    if(!mongoose) return missingPackageLogger(`mongoose`);
+    if (!mongoose) return missingPackageLogger(`mongoose`);
 
     mongoose.set(`runValidators`, true); // to run validate operators on update operations too
 
@@ -18,9 +18,9 @@ module.exports = (mongoose) => {
         useUnifiedTopology: true,
         dbName: dbToUse,
     })
-    .then((data) => console.log(`[ ${ dbToUse } ] DB Connected`))
-    .catch((err) => {
-        console.log(err)
-        console.log(`DB Not Connected`);
-    });
+        .then((data) => console.log(`[ ${dbToUse} ] DB Connected`))
+        .catch((err) => {
+            console.log(err)
+            console.log(`DB Not Connected`);
+        });
 }

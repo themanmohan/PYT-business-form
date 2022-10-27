@@ -1,9 +1,7 @@
 
 const mongoose = require(`mongoose`),
-    fetchAPI = require(`../util/fetchAPI`),
     BussinessForm = mongoose.model(`bussinessForm`),
     Media = mongoose.model(`media`),
-    { isValidEmailAddress } = require(`../util/verifications`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     deleteMediaDocumentsFromDB = require(`../util/deleteMediaDocumentsFromDB`),
     CountryCode = require(`../util/countryCodeData.json`);
@@ -15,12 +13,8 @@ exports.fetchPost = (req, res, next) => {
     const postID = req.params.postID,
         placeTag = req.query.location;
 
-    axios(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`, {
-        ...fetchAPI
-    })
+        axios.post(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`)
         .then((postDetail) => {
-
-            console.log(postDetail.data)
 
             const post = postDetail.data.data.locationData,
                 locationReviews = postDetail.data.data.postReviewsData;

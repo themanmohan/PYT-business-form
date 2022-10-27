@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + Date.now() + Path.extname(file.originalname))
     }
 });
-    
+
 exports.uploadImage = multer({
     storage: storage
 });
