@@ -15,6 +15,7 @@ exports.fetchPost = (req, res, next) => {
 
         axios.post(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`)
         .then((postDetail) => {
+            console.log(`postDetail`,postDetail.data)
 
             const post = postDetail.data.data.locationData,
                 locationReviews = postDetail.data.data.postReviewsData;
@@ -109,10 +110,14 @@ exports.validateFormData = async (req, res, next) => {
         sunday_start_time,
         sunday_end_time,
 
-        pytImages
+        pytImages,
+
+        locationID
 
 
     } = req.body;
+
+    console.log(req.body)
 
 
     const missingData = [],
@@ -250,7 +255,6 @@ exports.validateFormData = async (req, res, next) => {
                     resource_url: req.cloudinaryFiles.gallery[i]
                 });
 
-
                 itemImageEntities.unshift(itemImageFileEntity._id);
             }
         }
@@ -260,6 +264,7 @@ exports.validateFormData = async (req, res, next) => {
 
         if (location_name) businessFormDataObj.location_name = location_name;
         if (city) businessFormDataObj.city = city;
+        if (locationID) businessFormDataObj.location_id = locationID;
         if (country) businessFormDataObj.country = country;
         if (address) businessFormDataObj.address = address;
         if (contact_number) businessFormDataObj.contact_number = contact_number;

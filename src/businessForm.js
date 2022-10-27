@@ -272,11 +272,17 @@ function handlingBusinessForm() {
             pytImagesArr.push(carsolImage[i].currentSrc)
         }
 
- 
+        const locationIDElem = document.querySelector(`#locationID`),   
+            locationMongoID  = locationIDElem.dataset.locationId;
+
         const businessFormDataObj = {
             ...businessFormData,
             email_address: emailAddress,
             pytImages: pytImagesArr
+        }
+
+        if(locationIDElem && locationMongoID){
+            businessFormDataObj.locationID = locationMongoID
         }
 
           // Removing content-type header -> https://stackoverflow.com/questions/49692745/express-using-multer-error-multipart-boundary-not-found-request-sent-by-pos
