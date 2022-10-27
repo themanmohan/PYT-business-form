@@ -478,7 +478,6 @@ li{
   padding-bottom: 15px;
 }
 .gtco-testimonials .active {
-  opacity: 0.5;
   transition: all 0.3s;
 }
 .gtco-testimonials .center {
