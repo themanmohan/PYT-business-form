@@ -80,6 +80,10 @@ const businessFormSchema = new mongoose.Schema({
             type: String,
             required: true
         }]
+    },
+    location_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `admin`,
     }
 
 }, {
