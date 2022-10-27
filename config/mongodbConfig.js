@@ -4,8 +4,8 @@ module.exports = {
         dev: `mongodb://localhost:27017`
     },
     mainDbName: {
-        prod: `business-form-production`,
-        dev: `business-form-development`
+        prod: `PYT-2019`,
+        dev: `PYT-2019`
     }
 }
 
