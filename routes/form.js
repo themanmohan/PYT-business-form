@@ -19,6 +19,7 @@ router.get(`/postdetail/`,
     controllers.renderIndexPage
 )
 
+
 router.get(`/edit/:formDataID`,
     middleware.fetchingFormDataByID,
     controllers.renderEditFormDataPage
@@ -33,6 +34,7 @@ router.post(`/new`,
     uploadImage.fields(fileUploads),
     (req, res, next) => uploadMulterFilesToCloudinary(req, `/file-share-files`, next),
     middleware.validateFormData,
+    middleware.checkBussinesDetailAreadyExist,
     middleware.createBusinessFormInDB,
     controllers.sendBusinessFormCreationSuccessResponse,
 )

@@ -27,7 +27,7 @@ function checkingBusinessEmail() {
 
         <div class="email-verification-form-section">
 
-            <h3>Enter Your Email</h3>
+            <h3>Please enter your email</h3>
 
             <form id="email-verification-form">
                 <div class="form-group">
@@ -349,7 +349,11 @@ function handlingBusinessForm() {
                 })
                     .then(handleFetchErrors)
                     .then(standardFetchResponses.success)
-                    .catch(standardFetchResponses.error);
+                    .catch((err) => {
+                        console.log(err)
+                        loader.hide(loaderID);
+                        return standardFetchResponses.error(err);
+                    });
 
             }
 

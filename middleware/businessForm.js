@@ -5,7 +5,7 @@ const mongoose = require(`mongoose`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     deleteMediaDocumentsFromDB = require(`../util/deleteMediaDocumentsFromDB`),
     CountryCode = require(`../util/countryCodeData.json`);
-    axios = require(`axios`);
+axios = require(`axios`);
 
 
 exports.fetchPost = (req, res, next) => {
@@ -13,22 +13,22 @@ exports.fetchPost = (req, res, next) => {
     const postID = req.params.postID,
         placeTag = req.query.location;
 
-        axios.post(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`)
+    axios.post(`https://admin.pyt.travel/v1/location-detail/${postID}?location=${placeTag}`)
         .then((postDetail) => {
-            console.log(`postDetail`,postDetail.data)
+            console.log(`postDetail`, postDetail.data)
 
             const post = postDetail.data.data.locationData,
                 locationReviews = postDetail.data.data.postReviewsData;
 
             const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(post.country).toLocaleLowerCase());
 
-            if(!post){
+            if (!post) {
                 return res.redirect(`*`);
             }
             req.post = post;
             req.locationReviews = locationReviews;
             req.CountryISOCode = countryWithISOCode && countryWithISOCode[0] && countryWithISOCode[0].alpha2Code ? countryWithISOCode[0].alpha2Code : `IND`;
-  
+
             return next();
         })
         .catch((err) => {
@@ -45,7 +45,7 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
         .then((businessFormData) => {
 
             let businessFormDetail = {};
-   
+
             if (businessFormData) {
                 businessFormDetail = {
 
@@ -70,7 +70,7 @@ exports.checkAlreadyExistEmail = (req, res, next) => {
 
 exports.validateFormData = async (req, res, next) => {
 
-   
+
     const {
         location_name,
         city,
@@ -114,24 +114,12 @@ exports.validateFormData = async (req, res, next) => {
 
         locationID
 
-
     } = req.body;
 
     console.log(req.body)
 
-
     const missingData = [],
         invalidData = [];
-
-    // if (req.method === `POST`
-    //     && !(req.files
-    //         && req.files.gallery
-    //         && req.files.gallery.length
-    //         && req.files.gallery.every((mediaFile) => Boolean(mediaFile.location)))) {
-
-    //     // POST method means it's a new listing (and new listings must have item_gallery images)
-    //     missingData.push(`item images`);
-    // }
 
     if (!(location_name && (typeof location_name === `string`) && location_name.trim())) missingData.push(`location name`);
     if (!(city && (typeof city === `string`) && city.trim())) missingData.push(`city`);
@@ -139,12 +127,10 @@ exports.validateFormData = async (req, res, next) => {
     if (!(address && (typeof address === `string`) && address.trim())) missingData.push(`address`);
     if (!(interests && (typeof interests === `string`) && address.trim())) missingData.push(`interests`);
     if (!(description && (typeof description === `string`) && description.trim())) missingData.push(`description`);
+    if (!locationID) missingData.push(`location`);
 
     if (!contact_number) missingData.push(`contact number`);
-    else if (contact_number && isNaN(contact_number)) invalidData(`contact number`)
-
-    // if (!email_address) missingData.push(`email address`);
-    // else if (email_address && !isValidEmailAddress(email_address)) invalidData(`email address`);
+    else if (contact_number && isNaN(contact_number)) invalidData(`contact number`);
 
     if (!website) missingData.push(`website`);
     else if (website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
@@ -272,16 +258,40 @@ exports.validateFormData = async (req, res, next) => {
         if (website) businessFormDataObj.website = website;
         if (interests) businessFormDataObj.interests = Array.isArray(interests) ? interests : interests.split(`,`);
         if (description) businessFormDataObj.description = description;
-        if(pytImages) businessFormDataObj.pytImages = JSON.parse(pytImages);
+        if (pytImages) businessFormDataObj.pytImages = JSON.parse(pytImages);
         if (itemImageEntities && itemImageEntities.length) businessFormDataObj.media = {
-            gallery : itemImageEntities
+            gallery: itemImageEntities
         }
+        businessFormDataObj.status = Number(1);
 
         if (businessTimingArray && businessTimingArray.length) businessFormDataObj.timing = businessTimingArray;
 
         req.businessFormDataObj = businessFormDataObj;
         return next()
 
+    }
+
+}
+
+exports.checkBussinesDetailAreadyExist = async (req, res, next) => {
+
+    try {
+        const locationID = req.businessFormDataObj.location_id;
+
+        const bussinessDetail = await BussinessForm.find({ location_id: locationID });
+
+        if (bussinessDetail && bussinessDetail.length) {
+            return sendFailureJSONResponse(res, {
+                openInfoModal: true,
+                message: `bussines detail already exist`
+            });
+        }
+        else {
+            return next()
+        }
+    }
+    catch (err) {
+        console.log(err)
     }
 
 }
@@ -303,40 +313,40 @@ exports.editFormDataInDB = (req, res, next) => {
     const formDataID = req.params.formDataID,
         businessFormDetail = req.businessFormDataObj;
 
-        BussinessForm.findById(formDataID)
+    BussinessForm.findById(formDataID)
         .then((listing) => {
-           
-            if(!listing){
+
+            if (!listing) {
                 return sendFailureJSONResponse(res, {
                     message: `Listing does not exist`
                 });
             }
-    
+
             // Remove media that admin has specified is meant for deletion
             const { media_to_delete: mediaToDelete } = req.body;
-    
-            for(let key in mediaToDelete){
+
+            for (let key in mediaToDelete) {
                 const idsToDelete = mediaToDelete[key].split(`,`);
-    
-                for(let i=idsToDelete.length - 1; i >= 0; i--){
-                    
+
+                for (let i = idsToDelete.length - 1; i >= 0; i--) {
+
                     const indexOfIDToDelete = listing.media[key].findIndex((savedID) => savedID.toString() === idsToDelete[i]);
-    
-                    if(indexOfIDToDelete !== -1){
+
+                    if (indexOfIDToDelete !== -1) {
                         listing.media[key].splice(indexOfIDToDelete, 1);
                     }
                 }
-    
+
                 // Delete old media documents from DB (cleanup)
                 deleteMediaDocumentsFromDB(idsToDelete, mongoose, Media);
             }
-    
+
 
             const itemImagesToUse = [
                 ...listing.media.gallery,
             ];
 
-            if( businessFormDetail.media){
+            if (businessFormDetail.media) {
                 itemImagesToUse.push(...businessFormDetail.media.gallery)
             }
 
@@ -366,7 +376,7 @@ exports.fetchingFormDataAndRenderOnIndexPage = (req, res, next) => {
         formDataID = req.query.formDataID;
 
 
-    BussinessForm.findOne({ _id: formDataID, email_address: email  })
+    BussinessForm.findOne({ _id: formDataID, email_address: email })
         .populate({
             path: `media.gallery`,
             select: `resource_url`
