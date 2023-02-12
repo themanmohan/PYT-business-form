@@ -4,8 +4,9 @@ const mongoose = require(`mongoose`),
     Media = mongoose.model(`media`),
     { sendFailureJSONResponse } = require(`../handlers/jsonResponseHandlers`),
     deleteMediaDocumentsFromDB = require(`../util/deleteMediaDocumentsFromDB`),
-    CountryCode = require(`../util/countryCodeData.json`);
-axios = require(`axios`);
+    CountryCode = require(`../util/countryCodeData.json`),
+    bussionFormSubmissionEmail = require(`../resources/emailFunction`),
+    axios = require(`axios`);
 
 
 exports.fetchPost = (req, res, next) => {
@@ -116,8 +117,6 @@ exports.validateFormData = async (req, res, next) => {
 
     } = req.body;
 
-    console.log(req.body)
-
     const missingData = [],
         invalidData = [];
 
@@ -134,6 +133,8 @@ exports.validateFormData = async (req, res, next) => {
 
     if (!website) missingData.push(`website`);
     else if (website && !String(website).match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi)) invalidData.push(`website`);
+
+    console.log(missingData, invalidData )
 
     if (missingData.length || invalidData.length) {
         const data = {};
@@ -302,8 +303,14 @@ exports.createBusinessFormInDB = async (req, res, next) => {
 
     const redirectUrl = `/business-form/postdetail?email=${bussinessFormData.email_address}&formDataID=${bussinessFormData._id}`;
 
-    console.log(bussinessFormData)
     await bussinessFormData.save();
+
+    const name = null,
+        email = `manmohankumar023@gmail.com`,
+        message = `You have new business form submisson for location:- ${bussinessFormData?.location_name}`;
+
+    bussionFormSubmissionEmail(email, name, message )
+
     req.redirectUrl = redirectUrl
 
     return next();
@@ -360,6 +367,12 @@ exports.editFormDataInDB = (req, res, next) => {
         .then((updatedListing) => {
             const redirectUrl = `/business-form/postdetail?email=${updatedListing.email_address}&formDataID=${updatedListing._id}`;
             req.redirectUrl = redirectUrl;
+
+            const name = null,
+                email = `manmohankumar023@gmail.com`,
+                message = `Bussiness form edited for location:- ${updatedListing?.location_name}`;
+
+            bussionFormSubmissionEmail(email, name, message)
             return next()
         })
         .catch((err) => {
@@ -403,7 +416,10 @@ exports.fetchingFormDataByID = (req, res, next) => {
             select: `resource_url`
         })
         .then((businessFormDetail) => {
-            req.businessFormDetail = businessFormDetail
+            const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(businessFormDetail.country).toLocaleLowerCase());
+            req.CountryISOCode = countryWithISOCode && countryWithISOCode[0] && countryWithISOCode[0].alpha2Code ? countryWithISOCode[0].alpha2Code : `IND`;
+            req.businessFormDetail = businessFormDetail;
+          
             return next();
 
         })

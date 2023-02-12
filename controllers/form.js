@@ -24,7 +24,8 @@ exports.renderEditFormDataPage = (req, res, next) => {
 
     return res.render(`form/edit`, {
         docTitle: req.businessFormDetail.location_name,
-        businessFormDetail : req.businessFormDetail
+        businessFormDetail : req.businessFormDetail,
+        CountryISOCode: req.CountryISOCode
     });
 
 }

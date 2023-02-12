@@ -52,8 +52,13 @@
 <script src="/build/js/intlTelInput.js"></script>
 <script>
 
-    const countryCodeEl= document.querySelector(`#country-code`),
-        countryCode = countryCodeEl.dataset.id;
+    const countryCodeEl= document.querySelector(`#country-code`);
+
+    if(countryCodeEl){
+
+  
+
+        const countryCode = countryCodeEl.dataset.id;
         console.log(countryCode)
         
   var input = document.querySelector("#contact_number");
@@ -79,7 +84,9 @@
     preferredCountries: [countryCode],
     separateDialCode: true,
     utilsScript: "/build/js/utils.js",
+    
   });
+    }
 </script>
 
 

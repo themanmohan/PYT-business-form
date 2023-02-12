@@ -19,8 +19,6 @@
 
                 <ul class="nav navbar-nav navbar-right pull-right">
 
-
-
                     
                 </ul>
 
@@ -43,6 +41,7 @@
             <div class="col-sm-12">
 
                 <h4 class="page-title">Edit Your Business Information</h4>
+                <h4 id="locationID" data-location-id="<%=businessFormDetail?.location_id%>"></h4>
 
                     <ol class="breadcrumb ">
                         <li class="active"><%= docTitle%></li>
@@ -66,6 +65,7 @@
                         <p class="text-muted font-13 m-b-30">
                             Fill the firm name and Address
                         </p>
+                            <p id="country-code" data-id="<%=CountryISOCode%>"></p>
 
                         <div class="form-group">
                             <label for="location_name">Location Name*</label>
