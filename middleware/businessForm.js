@@ -306,7 +306,7 @@ exports.createBusinessFormInDB = async (req, res, next) => {
     await bussinessFormData.save();
 
     const name = null,
-        email = `trehan.nitin@gmail.com`,
+        email = `manmohankumar023@gmail.com`,
         message = `You have new business form submisson for location:- ${bussinessFormData?.location_name}`;
 
     bussionFormSubmissionEmail(email, name, message )
@@ -369,7 +369,7 @@ exports.editFormDataInDB = (req, res, next) => {
             req.redirectUrl = redirectUrl;
 
             const name = null,
-                email = `trehan.nitin@gmail.com`,
+                email = `manmohankumar023@gmail.com`,
                 message = `Bussiness form edited for location:- ${updatedListing?.location_name}`;
 
             bussionFormSubmissionEmail(email, name, message)
