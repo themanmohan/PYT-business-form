@@ -21,7 +21,7 @@ exports.fetchPost = (req, res, next) => {
             const post = postDetail?.data?.data?.locationData,
                 locationReviews = postDetail?.data?.data?.postReviewsData;
 
-            const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(post.country).toLocaleLowerCase());
+            const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(post?.country).toLocaleLowerCase());
 
             if (!post) {
                 return res.redirect(`*`);
