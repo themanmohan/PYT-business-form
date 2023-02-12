@@ -18,8 +18,8 @@ exports.fetchPost = (req, res, next) => {
         .then((postDetail) => {
             console.log(`postDetail`, postDetail.data)
 
-            const post = postDetail.data.data.locationData,
-                locationReviews = postDetail.data.data.postReviewsData;
+            const post = postDetail?.data?.data?.locationData,
+                locationReviews = postDetail?.data?.data?.postReviewsData;
 
             const countryWithISOCode = CountryCode.filter((country) => String(country.englishShortName).toLocaleLowerCase() === String(post.country).toLocaleLowerCase());
 
